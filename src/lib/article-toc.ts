@@ -44,3 +44,44 @@ export function articleHeadingFromHash(hash: string, headingIds: readonly string
   }
   return headingIds.includes(fragment) ? fragment : undefined
 }
+
+export interface ArticleAnchorProtection {
+  hash: string
+  scrollY: number
+}
+
+/** Keep an explicit anchor's original clamped destination as late content expands. */
+export function articleAnchorProtection(
+  previous: ArticleAnchorProtection | undefined,
+  hash: string,
+  destination: number | undefined,
+): ArticleAnchorProtection | undefined {
+  if (destination === undefined) return undefined
+  return {
+    hash,
+    scrollY: previous?.hash === hash ? Math.min(previous.scrollY, destination) : destination,
+  }
+}
+
+/** Undefined leaves non-reading anchors alone; an empty hash returns to the article top. */
+export function articleReadingHash(
+  headings: readonly HeadingPosition[],
+  scrollY: number,
+  articleBottom: number,
+  activeId: string | undefined,
+  currentHash: string,
+  protectedAnchorScrollY?: number,
+): string | undefined {
+  const first = headings[0]
+  if (!first || !activeId || !headings.some(heading => heading.id === activeId)) return undefined
+  // Comment anchors have their own scroll margin and can land above the normal
+  // article reading boundary. Keep them until the reader scrolls back above it.
+  if (protectedAnchorScrollY !== undefined && scrollY + ALIGNMENT_TOLERANCE >= protectedAnchorScrollY) return undefined
+  // Once the reading line reaches comments, keep explicit comment links intact.
+  if (scrollY + first.offset >= articleBottom) return undefined
+  if (scrollY + ALIGNMENT_TOLERANCE < first.top - first.offset) {
+    return articleHeadingFromHash(currentHash, headings.map(heading => heading.id)) ? '' : undefined
+  }
+  // Encode the literal DOM id once, including restored ids that contain percent escapes.
+  return '#' + encodeURIComponent(activeId)
+}

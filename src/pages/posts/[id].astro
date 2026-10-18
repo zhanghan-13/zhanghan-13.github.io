@@ -43,14 +43,18 @@ const headings = post.data.legacySlug ? post.data.headings : markdownHeadings.ma
   </div>
 </SiteLayout>
 <script>
-  import { activeArticleHeading, articleHeadingFromHash } from '@/lib/article-toc'
+  import { activeArticleHeading, articleAnchorProtection, articleHeadingFromHash, articleReadingHash } from '@/lib/article-toc'
+  import type { ArticleAnchorProtection } from '@/lib/article-toc'
 
   const links = [...document.querySelectorAll<HTMLAnchorElement>('.toc-link')]
   const headings = [...document.querySelectorAll<HTMLElement>('.article-body :is(h1,h2,h3,h4,h5,h6)[id]')]
   const headingIds = headings.map(heading => heading.id)
+  const articleBody = document.querySelector<HTMLElement>('.article-body')
   let anchorId = articleHeadingFromHash(location.hash, headingIds)
   let activeId: string | undefined
   let queued = false
+  let syncReadingAddress = false
+  let protectedAnchor: ArticleAnchorProtection | undefined
   function select(id: string | undefined) {
     if (id === activeId) return
     activeId = id
@@ -58,34 +62,65 @@ const headings = post.data.legacySlug ? post.data.headings : markdownHeadings.ma
   }
   function update() {
     queued = false
+    const syncAddress = syncReadingAddress
+    syncReadingAddress = false
     const scrollY = window.scrollY
     const root = document.documentElement
     const padding = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0
+    const maxScrollY = Math.max(0, root.scrollHeight - root.clientHeight)
     const positions = headings.map(heading => ({
       id: heading.id,
       top: heading.getBoundingClientRect().top + scrollY,
       offset: padding + (parseFloat(getComputedStyle(heading).scrollMarginTop) || 0),
     }))
-    select(activeArticleHeading(positions, scrollY, Math.max(0, root.scrollHeight - root.clientHeight), anchorId))
+    select(activeArticleHeading(positions, scrollY, maxScrollY, anchorId))
+    const commentId = articleHeadingFromHash(location.hash, ['comments', 'comments-title'])
+    const commentTarget = commentId ? document.getElementById(commentId) : null
+    const commentDestination = commentTarget
+      ? Math.max(0, Math.min(maxScrollY, commentTarget.getBoundingClientRect().top + scrollY - padding - (parseFloat(getComputedStyle(commentTarget).scrollMarginTop) || 0)))
+      : undefined
+    // Capture the initial clamped position even before any scroll event. Giscus
+    // can later increase page height without moving the reader from that position.
+    protectedAnchor = articleAnchorProtection(protectedAnchor, location.hash, commentDestination)
+    // Only scrolling changes the shareable address. Initial rendering and late
+    // layout changes must not overwrite a deep link before native navigation.
+    if (syncAddress && articleBody) {
+      const hash = articleReadingHash(positions, scrollY, articleBody.getBoundingClientRect().bottom + scrollY, activeId, location.hash, protectedAnchor?.scrollY)
+      if (hash !== undefined && hash !== location.hash) {
+        // Replace, rather than push, so reading does not fill browser history.
+        // Do not change anchorId: it is reserved for explicit navigation.
+        history.replaceState(history.state, '', location.pathname + location.search + hash)
+      }
+    }
   }
   function scheduleUpdate() {
     if (queued) return
     queued = true
     requestAnimationFrame(update)
   }
-  window.addEventListener('scroll', scheduleUpdate, { passive: true })
-  window.addEventListener('resize', scheduleUpdate)
-  window.addEventListener('hashchange', () => {
-    anchorId = articleHeadingFromHash(location.hash, headingIds)
+  window.addEventListener('scroll', () => {
+    syncReadingAddress = true
     scheduleUpdate()
+  }, { passive: true })
+  window.addEventListener('resize', scheduleUpdate)
+  function locationChanged() {
+    anchorId = articleHeadingFromHash(location.hash, headingIds)
+    syncReadingAddress = false
+    protectedAnchor = undefined
+    scheduleUpdate()
+  }
+  window.addEventListener('hashchange', locationChanged)
+  window.addEventListener('popstate', locationChanged)
+  window.addEventListener('pageshow', event => {
+    // Initial pageshow may follow widget loading; keep the first destination.
+    if (event.persisted) locationChanged()
+    else scheduleUpdate()
   })
-  window.addEventListener('pageshow', scheduleUpdate)
   document.fonts.ready.then(scheduleUpdate)
   // Late images, code highlighting and the comment widget can change positions
   // without a scroll event. Re-read geometry instead of caching heading tops.
   const resizeObserver = new ResizeObserver(scheduleUpdate)
   resizeObserver.observe(document.body)
-  const articleBody = document.querySelector('.article-body')
   if (articleBody) resizeObserver.observe(articleBody)
 
   links.forEach(link => link.addEventListener('click', event => {
@@ -95,6 +130,7 @@ const headings = post.data.legacySlug ? post.data.headings : markdownHeadings.ma
     event.preventDefault()
     document.querySelector<HTMLDetailsElement>('.mobile-toc')?.removeAttribute('open')
     anchorId = target.id
+    syncReadingAddress = false
     select(anchorId)
     // Native fragment navigation records scroll restoration for Back/Forward.
     if (location.hash !== link.hash) location.hash = link.hash
