@@ -6,7 +6,7 @@ import { getPostSummaries } from '@/lib/posts'
 import '@/index.css'
 
 interface Props { title?: string; description?: string; section?: string; noindex?: boolean; article?: { title: string; date: string } }
-const { title = '博客', description = 'ZhangHan 的个人博客。一名软件工程师。', section = '/', noindex = false, article } = Astro.props
+const { title = '博客', description = 'ZhangHan 的个人博客。软件工程师、学习者。', section = '/', noindex = false, article } = Astro.props
 const canonical = new URL(Astro.url.pathname === '/404/' ? '/404.html' : Astro.url.pathname, Astro.site).href
 const posts = await getPostSummaries()
 const nav = [{ path: '/', label: '博客' }, { path: '/categories/', label: '分类' }, { path: '/writing/', label: '写作统计' }, { path: '/archive/', label: '归档' }, { path: '/about/', label: '关于我' }]
