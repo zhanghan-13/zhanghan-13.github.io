@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArticleImagePreview } from './article-image-preview'
+import { ArticleCodeCopy } from './article-code-copy'
 import { highlightArticleCode } from '@/lib/article-highlight'
 import '@/code-highlight.css'
 
@@ -13,10 +14,13 @@ export default function ArticleEnhancements({ postId }: { postId: string }) {
     if (!body) return
     rootRef.current = body
     highlightArticleCode(body)
-    // Mount the image enhancer only after its DOM target is available.
+    // Mount controls only after the article and normalized code are available.
     setReady(true)
     return () => { rootRef.current = null }
   }, [postId])
 
-  return ready ? <ArticleImagePreview rootRef={rootRef} articleId={postId} /> : null
+  return ready ? <>
+    <ArticleCodeCopy rootRef={rootRef} articleId={postId} />
+    <ArticleImagePreview rootRef={rootRef} articleId={postId} />
+  </> : null
 }

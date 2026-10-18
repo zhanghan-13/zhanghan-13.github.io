@@ -25,6 +25,36 @@
   overscroll-behavior-x:contain;
   tab-size:4;
 }
+/* Reserve the toolbar space before hydration so deep links do not move. */
+.article-body pre:not(.article-code-block > pre) { padding-top:52px; }
+.article-body .article-code-block {
+  min-width:0;
+  /* Match the original pre margin (1.6em at its 13px code size). */
+  margin:20.8px 0;
+  border-radius:8px;
+  background:var(--muted);
+}
+.article-body .article-code-toolbar {
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  min-height:48px;
+  padding:2px 6px;
+}
+.article-body .article-code-block > pre {
+  margin:0;
+  padding-top:4px;
+}
+.article-code-toolbar .code-copy-button { min-width:88px; }
+.article-code-toolbar .code-copy-status {
+  color:var(--muted-foreground);
+  font-size:12px;
+  line-height:1.5;
+}
+@media(max-width:640px) {
+  .article-body .article-code-block { margin-block:19.2px; }
+}
 .article-body pre > code.hljs {
   display:block;
   padding:0;
