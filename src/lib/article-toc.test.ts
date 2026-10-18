@@ -48,12 +48,18 @@ test('reading addresses follow the chapter while preserving top and non-article 
   assert.equal(articleReadingHash([], 900, 1600, undefined, ''), undefined)
 })
 
-test('reading addresses retain native deep-link compatibility with restored percent-encoded ids', () => {
-  const id = '%E5%89%8D%E8%A8%80'
+test('reading addresses use one encoding layer while old double-encoded links resolve through aliases', () => {
+  const id = '前言'
+  const legacyId = encodeURIComponent(id)
+  const aliases = new Map([[legacyId, id]])
   const headings = [{ id, top: 350, offset: 120 }]
   const hash = articleReadingHash(headings, 400, 1600, id, '')!
   assert.equal(decodeURIComponent(hash.slice(1)), id)
-  assert.equal(articleHeadingFromHash(hash, [id]), id)
+  assert.equal(hash.includes('%25'), false)
+  assert.equal(articleHeadingFromHash(hash, [id], aliases), id)
+  assert.equal(articleHeadingFromHash('#' + encodeURIComponent(legacyId), [id], aliases), id)
+  assert.equal(articleHeadingFromHash('#前言', [id], aliases), id)
+  assert.equal(articleHeadingFromHash('#comments', [id], aliases), undefined)
 })
 
 test('comment deep links survive the larger comment scroll margin until scrolling back into the article', () => {

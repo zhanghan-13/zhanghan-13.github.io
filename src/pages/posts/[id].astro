@@ -9,6 +9,7 @@ import Comments from '@/components/Comments'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { getPosts, getPostSummaries, postUrl } from '@/lib/posts'
+import { renderLegacyArticle } from '@/lib/legacy-article'
 
 export async function getStaticPaths() {
   return (await getPosts()).map(post => ({ params: { id: post.id }, props: { post } }))
@@ -20,8 +21,9 @@ const summary = posts[index]
 const { Content, headings: markdownHeadings } = await render(post)
 // Historical HTML is already sanitized during migration. Render it without a
 // second Markdown pass so blank lines inside legacy code blocks stay exact.
-const legacyHtml = post.data.legacySlug ? post.body : undefined
-const headings = post.data.legacySlug ? post.data.headings : markdownHeadings.map(heading => ({ id: heading.slug, text: heading.text, level: heading.depth }))
+const legacy = post.data.legacySlug ? renderLegacyArticle(post.body!, post.data.headings) : undefined
+const legacyHtml = legacy?.html
+const headings = legacy ? legacy.headings : markdownHeadings.map(heading => ({ id: heading.slug, text: heading.text, level: heading.depth }))
 ---
 <SiteLayout title={post.data.title} description={post.data.excerpt} article={{ title: post.data.title, date: post.data.date }}>
   <div class:list={['article-layout', { 'without-toc': headings.length === 0 }]}>
@@ -49,8 +51,18 @@ const headings = post.data.legacySlug ? post.data.headings : markdownHeadings.ma
   const links = [...document.querySelectorAll<HTMLAnchorElement>('.toc-link')]
   const headings = [...document.querySelectorAll<HTMLElement>('.article-body :is(h1,h2,h3,h4,h5,h6)[id]')]
   const headingIds = headings.map(heading => heading.id)
+  const headingAliases = new Map([...document.querySelectorAll<HTMLElement>('.article-anchor-alias[data-heading-alias]')].map(alias => [alias.id, alias.dataset.headingAlias!]))
   const articleBody = document.querySelector<HTMLElement>('.article-body')
-  let anchorId = articleHeadingFromHash(location.hash, headingIds)
+  function resolveHeadingAddress() {
+    const id = articleHeadingFromHash(location.hash, headingIds, headingAliases)
+    if (id) {
+      const hash = '#' + encodeURIComponent(id)
+      // Old bookmarks still land on their native alias, then use the readable URL.
+      if (location.hash !== hash) history.replaceState(history.state, '', location.pathname + location.search + hash)
+    }
+    return id
+  }
+  let anchorId = resolveHeadingAddress()
   let activeId: string | undefined
   let queued = false
   let syncReadingAddress = false
@@ -104,7 +116,7 @@ const headings = post.data.legacySlug ? post.data.headings : markdownHeadings.ma
   }, { passive: true })
   window.addEventListener('resize', scheduleUpdate)
   function locationChanged() {
-    anchorId = articleHeadingFromHash(location.hash, headingIds)
+    anchorId = resolveHeadingAddress()
     syncReadingAddress = false
     protectedAnchor = undefined
     scheduleUpdate()

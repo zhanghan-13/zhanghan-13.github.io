@@ -399,7 +399,8 @@ html { scroll-padding-top:108px; }
 .toc-link.toc-nested { padding-left:22px; }
 .toc-link:hover { background:var(--muted); color:var(--foreground); }
 .toc-link[aria-current] { background:var(--muted); color:var(--foreground); font-weight:600; }
-.article-body :is(h1,h2,h3,h4,h5,h6) { scroll-margin-top:12px; }
+.article-body :is(h1,h2,h3,h4,h5,h6) { position:relative; scroll-margin-top:12px; }
+.article-anchor-alias { position:absolute; top:0; left:0; width:0; height:0; scroll-margin-top:inherit; }
 .article-body :is(h1,h2,h3,h4,h5,h6):focus { outline:none; }
 .mobile-toc { display:none; }
 .adjacent-posts { margin-top:28px; }

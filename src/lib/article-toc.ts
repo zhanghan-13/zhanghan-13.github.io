@@ -33,16 +33,18 @@ export function activeArticleHeading(
   return active
 }
 
-export function articleHeadingFromHash(hash: string, headingIds: readonly string[]): string | undefined {
+export function articleHeadingFromHash(hash: string, headingIds: readonly string[], aliases?: ReadonlyMap<string, string>): string | undefined {
   const fragment = hash.replace(/^#/, '')
   if (!fragment) return undefined
+  const resolve = (id: string) => headingIds.includes(id) ? id : aliases?.get(id)
   try {
     const decoded = decodeURIComponent(fragment)
-    if (headingIds.includes(decoded)) return decoded
+    const id = resolve(decoded)
+    if (id) return id
   } catch {
     // A literal percent sign in a historical heading is a valid DOM id.
   }
-  return headingIds.includes(fragment) ? fragment : undefined
+  return resolve(fragment)
 }
 
 export interface ArticleAnchorProtection {
@@ -82,6 +84,6 @@ export function articleReadingHash(
   if (scrollY + ALIGNMENT_TOLERANCE < first.top - first.offset) {
     return articleHeadingFromHash(currentHash, headings.map(heading => heading.id)) ? '' : undefined
   }
-  // Encode the literal DOM id once, including restored ids that contain percent escapes.
+  // Encode the canonical DOM id once; browsers display ordinary Chinese fragments.
   return '#' + encodeURIComponent(activeId)
 }

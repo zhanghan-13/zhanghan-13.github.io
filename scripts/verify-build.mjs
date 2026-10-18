@@ -133,9 +133,45 @@ for (const { data, body } of published) {
   if (!$) continue
   const article = $('.article-body')
   assert(article.length === 1, `${pathname}: expected one .article-body container`)
+  const articleHeadings = article.find('h1,h2,h3,h4,h5,h6').toArray()
+  const headingAliases = article.find('.article-anchor-alias').toArray()
+  const headingAnchorIds = [...articleHeadings, ...headingAliases].map(node => $(node).attr('id')).filter(id => id !== undefined)
+  assert(new Set(headingAnchorIds).size === headingAnchorIds.length, `${pathname}: duplicate heading or legacy alias IDs`)
+  for (const alias of headingAliases) {
+    const node = $(alias)
+    const parent = node.parent()
+    const target = node.attr('data-heading-alias')
+    assert(node.is('span') && Boolean(node.attr('id')), `${pathname}: legacy heading alias must be a span with an ID`)
+    assert(parent.is('h1,h2,h3,h4,h5,h6') && parent.attr('id') === target && Boolean(target), `${pathname}: legacy alias ${node.attr('id')} points to the wrong heading`)
+    assert(parent.contents().get(0) === alias, `${pathname}: legacy alias ${node.attr('id')} must be the heading's first child`)
+    assert(node.attr('aria-hidden') === 'true' && node.text() === '', `${pathname}: legacy alias ${node.attr('id')} must have no visible or accessible text`)
+  }
   for (const heading of data.headings || []) {
     assert(typeof heading.id === 'string' && heading.id.length > 0, `${pathname}: heading has no stable ID`)
-    assert(article.find('h1,h2,h3,h4,h5,h6').toArray().some(node => $(node).attr('id') === heading.id), `${pathname}: missing source heading ${heading.id}`)
+    if (typeof heading.id !== 'string' || !heading.id.length) continue
+    let canonicalId = heading.id
+    if (data.legacySlug) {
+      try { canonicalId = decodeURIComponent(heading.id) } catch { /* Keep literal malformed percent IDs unchanged. */ }
+    }
+    const canonicalHeadings = articleHeadings.filter(node => $(node).attr('id') === canonicalId)
+    assert(canonicalHeadings.length === 1, `${pathname}: expected one canonical heading ${canonicalId} for source ${heading.id}`)
+    if (canonicalId === heading.id) continue
+    const aliases = headingAliases.filter(node => $(node).attr('id') === heading.id)
+    assert(aliases.length === 1, `${pathname}: missing or duplicate legacy alias ${heading.id}`)
+    if (aliases.length === 1) {
+      const alias = $(aliases[0])
+      assert(alias.attr('data-heading-alias') === canonicalId && alias.parent().attr('id') === canonicalId, `${pathname}: legacy alias ${heading.id} must point to its single-decoded heading ${canonicalId}`)
+    }
+    assert(!articleHeadings.some(node => $(node).attr('id') === heading.id), `${pathname}: encoded legacy ID ${heading.id} remains on a heading`)
+    $('.toc-link').each((_, link) => {
+      const node = $(link)
+      assert(node.attr('data-heading') !== heading.id, `${pathname}: table of contents still targets legacy heading ${heading.id}`)
+      const href = node.attr('href') || ''
+      if (!href.startsWith('#')) return
+      let target
+      try { target = decodeURIComponent(href.slice(1)) } catch { return }
+      assert(target !== heading.id, `${pathname}: table of contents still links to encoded legacy ID ${heading.id}`)
+    })
   }
   if (!data.legacySlug) continue
   const source = load(body)
