@@ -1,0 +1,11 @@
+.comments { margin-top:56px; padding-top:32px; border-top:1px solid var(--border); scroll-margin-top:120px; }
+.comments-heading { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 20px; margin-bottom:24px; }
+.comments-heading h2 { font-size:22px; line-height:1.4; font-weight:600; }
+.comments-heading h2 span { margin-left:6px; color:var(--muted-foreground); font-size:17px; font-weight:400; }
+.comments-heading p,.comment-status,.comment-unavailable p { font-size:13px; color:var(--muted-foreground); line-height:1.6; }
+.comment-unavailable { display:flex; align-items:center; flex-wrap:wrap; gap:16px; min-height:100px; }
+.comments giscus-widget { display:block; min-height:200px; }
+@media(max-width:600px) {
+  .comments { margin-top:40px; padding-top:24px; }
+  .comments-heading { flex-direction:column; margin-bottom:20px; }
+}

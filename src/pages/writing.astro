@@ -1,0 +1,8 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro'
+import WritingStats from '@/components/WritingStats'
+import { getPostSummaries } from '@/lib/posts'
+import { todayInShanghai } from '@/lib/monthly'
+const posts = await getPostSummaries()
+---
+<SiteLayout title="写作统计" section="/writing/"><WritingStats posts={posts} asOf={todayInShanghai()} client:load /></SiteLayout>

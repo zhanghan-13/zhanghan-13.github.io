@@ -1,0 +1,7 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro'
+import ArchiveBrowser from '@/components/ArchiveBrowser'
+import { getPostSummaries } from '@/lib/posts'
+const posts = await getPostSummaries()
+---
+<SiteLayout title="文章归档" section="/archive/"><ArchiveBrowser posts={posts} client:load /></SiteLayout>

@@ -1,0 +1,12 @@
+---
+import { ArrowRight } from 'lucide-react'
+import { Separator } from '@/components/ui/separator'
+import PostMeta from './PostMeta.astro'
+import { postUrl } from '@/lib/posts'
+import type { PostSummary } from '@/lib/types'
+interface Props { posts: PostSummary[] }
+const { posts } = Astro.props
+---
+<div class="post-list post-list-cards">
+  {posts.map(post => <article class="post-row"><a class="post-link" href={postUrl(post.id)}><div class="post-row-content"><h3>{post.title}</h3><p class="post-excerpt">{post.excerpt}</p><PostMeta post={post} showTags /></div><ArrowRight className="post-arrow" aria-hidden="true" /></a><Separator /></article>)}
+</div>

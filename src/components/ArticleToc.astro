@@ -1,0 +1,6 @@
+---
+interface Props { headings: { id: string; text: string; level: number }[] }
+const { headings } = Astro.props
+const base = Math.min(...headings.map(heading => heading.level))
+---
+<nav class="toc-links" aria-label="文章目录">{headings.map(heading => <a class:list={['toc-link', { 'toc-nested': heading.level > base }]} data-heading={heading.id} href={'#' + encodeURIComponent(heading.id)}>{heading.text}</a>)}</nav>

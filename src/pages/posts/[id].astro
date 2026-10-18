@@ -1,0 +1,74 @@
+---
+import { render } from 'astro:content'
+import { ArrowLeft } from 'lucide-react'
+import SiteLayout from '@/layouts/SiteLayout.astro'
+import ArticleToc from '@/components/ArticleToc.astro'
+import PostMeta from '@/components/PostMeta.astro'
+import ArticleEnhancements from '@/components/ArticleEnhancements'
+import Comments from '@/components/Comments'
+import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
+import { getPosts, getPostSummaries, postUrl } from '@/lib/posts'
+
+export async function getStaticPaths() {
+  return (await getPosts()).map(post => ({ params: { id: post.id }, props: { post } }))
+}
+const { post } = Astro.props
+const posts = await getPostSummaries()
+const index = posts.findIndex(item => item.id === post.id)
+const summary = posts[index]
+const { Content, headings: markdownHeadings } = await render(post)
+// Historical HTML is already sanitized during migration. Render it without a
+// second Markdown pass so blank lines inside legacy code blocks stay exact.
+const legacyHtml = post.data.legacySlug ? post.body : undefined
+const headings = post.data.legacySlug ? post.data.headings : markdownHeadings.map(heading => ({ id: heading.slug, text: heading.text, level: heading.depth }))
+---
+<SiteLayout title={post.data.title} description={post.data.excerpt} article={{ title: post.data.title, date: post.data.date }}>
+  <div class:list={['article-layout', { 'without-toc': headings.length === 0 }]}>
+    {headings.length > 0 && <aside class="article-sidebar"><div class="toc-panel"><h2>目录</h2><ArticleToc headings={headings} /></div></aside>}
+    <main id="main" tabindex="-1" class="page article-page">
+      <a class="article-back" href="/"><ArrowLeft aria-hidden="true" />返回博客</a>
+      <header class="article-heading"><h1>{post.data.title}</h1><PostMeta post={summary} /><div class="article-tags">{post.data.tags.slice(0, 5).map(tag => <Badge variant="secondary">{tag}</Badge>)}</div></header>
+      {headings.length > 0 && <details class="mobile-toc"><summary>目录</summary><ArticleToc headings={headings} /></details>}
+      {legacyHtml !== undefined ? <div class="article-body" set:html={legacyHtml} /> : <div class="article-body"><Content /></div>}
+      <ArticleEnhancements postId={post.id} client:load />
+      {post.data.imageOmitted && <p class="article-note">此篇部分配图尚未恢复。</p>}
+      <Comments postId={post.id} client:load />
+      <Separator />
+      <nav class="adjacent-posts" aria-label="相邻文章">
+        {index > 0 && <a href={postUrl(posts[index - 1].id)}><span>较新一篇</span><strong>{posts[index - 1].title}</strong></a>}
+        {index < posts.length - 1 && <a href={postUrl(posts[index + 1].id)}><span>较早一篇</span><strong>{posts[index + 1].title}</strong></a>}
+      </nav>
+    </main>
+  </div>
+</SiteLayout>
+<script>
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('.toc-link')]
+  const headings = [...document.querySelectorAll<HTMLElement>('.article-body :is(h1,h2,h3,h4,h5,h6)[id]')]
+  let queued = false
+  function update() {
+    queued = false
+    let active = headings[0]?.id
+    const offset = window.innerWidth <= 640 ? 190 : window.innerWidth < 1100 ? 160 : 120
+    for (const heading of headings) if (heading.getBoundingClientRect().top <= offset) active = heading.id
+    links.forEach(link => link.dataset.heading === active ? link.setAttribute('aria-current', 'location') : link.removeAttribute('aria-current'))
+  }
+  window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update) } }, { passive: true })
+  links.forEach(link => link.addEventListener('click', event => {
+    const target = document.getElementById(link.dataset.heading || '')
+    if (!target) return
+    event.preventDefault()
+    document.querySelector<HTMLDetailsElement>('.mobile-toc')?.removeAttribute('open')
+    history.replaceState(null, '', link.href)
+    target.scrollIntoView({ block: 'start' })
+    target.setAttribute('tabindex', '-1')
+    target.focus({ preventScroll: true })
+    update()
+  }))
+  document.querySelectorAll<HTMLAnchorElement>('.article-body a[href]').forEach(link => {
+    if (link.protocol === 'https:' || link.protocol === 'http:') {
+      if (link.origin !== location.origin) { link.target = '_blank'; link.rel = 'noopener noreferrer' }
+    }
+  })
+  update()
+</script>

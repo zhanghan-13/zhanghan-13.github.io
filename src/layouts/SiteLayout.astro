@@ -1,0 +1,65 @@
+---
+import HeaderControls from '@/components/HeaderControls'
+import { Separator } from '@/components/ui/separator'
+import { ArrowRight } from 'lucide-react'
+import { getPostSummaries } from '@/lib/posts'
+import '@/index.css'
+
+interface Props { title?: string; description?: string; section?: string; noindex?: boolean; article?: { title: string; date: string } }
+const { title = '博客', description = 'ZhangHan 的个人博客。一名软件工程师。', section = '/', noindex = false, article } = Astro.props
+const canonical = new URL(Astro.url.pathname === '/404/' ? '/404.html' : Astro.url.pathname, Astro.site).href
+const posts = await getPostSummaries()
+const nav = [{ path: '/', label: '博客' }, { path: '/writing/', label: '写作统计' }, { path: '/archive/', label: '归档' }, { path: '/about/', label: '关于我' }]
+const structuredData = article ? {
+  '@context': 'https://schema.org', '@type': 'BlogPosting', headline: article.title,
+  datePublished: `${article.date}T00:00:00+08:00`, author: { '@type': 'Person', name: 'ZhangHan', url: new URL('/about/', Astro.site).href },
+  mainEntityOfPage: canonical, description, inLanguage: 'zh-CN',
+} : { '@context': 'https://schema.org', '@type': 'WebSite', name: 'ZhangHan', url: String(Astro.site), inLanguage: 'zh-CN' }
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#fafafa" />
+    <title>{title} · ZhangHan</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/github-avatar.png" />
+    <link rel="alternate" type="application/rss+xml" title="ZhangHan" href="/rss.xml" />
+    <meta property="og:title" content={`${title} · ZhangHan`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:image" content={new URL('/github-avatar.png', Astro.site).href} />
+    <meta property="og:locale" content="zh_CN" />
+    {noindex && <meta name="robots" content="noindex" />}
+    {article && <meta property="article:published_time" content={`${article.date}T00:00:00+08:00`} />}
+    <script is:inline>
+      try {
+        const theme = localStorage.getItem('zhanghan-theme');
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+      } catch {}
+    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />
+  </head>
+  <body>
+    <div class="site">
+      <a class="skip-link" href="#main">跳到正文</a>
+      <div class="site-header-shell">
+        <header class="site-header">
+          <a href="/" class="wordmark" aria-label="ZhangHan 博客首页">ZhangHan</a>
+          <div class="header-right">
+            <nav class="site-nav" aria-label="主导航">
+              {nav.map(item => <a href={item.path} aria-current={section === item.path ? 'page' : undefined}>{item.label}</a>)}
+            </nav>
+            <HeaderControls posts={posts} client:load />
+          </div>
+        </header>
+      </div>
+      <slot />
+      <footer class="site-footer"><Separator /><div><span>ZhangHan</span><a href="/archive/">所有文章 <ArrowRight aria-hidden="true" /></a></div></footer>
+    </div>
+  </body>
+</html>

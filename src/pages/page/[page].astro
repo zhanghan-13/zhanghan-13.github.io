@@ -1,0 +1,9 @@
+---
+import HomePage from '@/components/HomePage.astro'
+import { getPosts } from '@/lib/posts'
+export async function getStaticPaths() {
+  return Array.from({ length: Math.max(0, Math.ceil((await getPosts()).length / 8) - 1) }, (_, i) => ({ params: { page: String(i + 2) }, props: { page: i + 2 } }))
+}
+const { page } = Astro.props
+---
+<HomePage page={page} />

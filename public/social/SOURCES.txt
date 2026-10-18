@@ -1,0 +1,21 @@
+Brand SVG assets from Simple Icons v11.15.0 (official repository).
+Retrieved: 2026-10-18
+
+github.svg
+Source: https://raw.githubusercontent.com/simple-icons/simple-icons/11.15.0/icons/github.svg
+Modification: root fill set to #68686d; original viewBox and path preserved.
+
+bilibili.svg
+Source: https://raw.githubusercontent.com/simple-icons/simple-icons/11.15.0/icons/bilibili.svg
+Modification: root fill set to #18afe6; original viewBox and path preserved.
+
+Simple Icons license: CC0 1.0 Universal.
+License: https://github.com/simple-icons/simple-icons/blob/11.15.0/LICENSE.md
+CC0: https://creativecommons.org/publicdomain/zero/1.0/
+Brand names and logos remain trademarks of their respective owners; CC0 does not grant trademark rights.
+
+Validation: SVG parsed as XML; no scripts, foreignObject, event attributes, href/external references, or url() references.
+
+mail.svg
+Source: original geometric envelope icon authored for this prototype.
+Style: white envelope inside a #68686d circle, matching the filled brand icons.

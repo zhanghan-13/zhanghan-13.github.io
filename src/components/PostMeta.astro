@@ -1,0 +1,13 @@
+---
+import CommentCount from '@/components/CommentCount'
+import type { PostSummary } from '@/lib/types'
+interface Props { post: PostSummary; showTags?: boolean }
+const { post, showTags = false } = Astro.props
+---
+<div class="post-meta">
+  <time datetime={post.date}>{post.date.replaceAll('-', '.')}</time>
+  {post.category && <><span aria-hidden="true">·</span><span>{post.category}</span></>}
+  <span aria-hidden="true">·</span><span>{post.wordCount.toLocaleString('zh-CN')} 字</span>
+  <span aria-hidden="true">·</span><CommentCount postId={post.id} client:load />
+  {showTags && post.tags.length > 0 && <span class="post-tags">{post.tags.slice(0, 2).join(' / ')}</span>}
+</div>
