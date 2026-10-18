@@ -1,6 +1,13 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { discussionTerm, getCommentState, giscusConfig, receiveDiscussionCount, refreshCommentCount } from './giscus.ts'
+import { discussionTerm, giscusConfig } from './giscus.ts'
+
+let { getCommentState, receiveDiscussionCount, receiveDiscussionNotFound, refreshCommentCount } = await import('./giscus.ts')
+let instance = 0
+test.beforeEach(async () => {
+  // Browser navigations get a new module instance; tests must not share cooldowns.
+  ;({ getCommentState, receiveDiscussionCount, receiveDiscussionNotFound, refreshCommentCount } = await import(`./giscus.ts?test=${instance++}`))
+})
 
 const item = (postId: string, comments: unknown, number = 1, category = giscusConfig.categoryId as string) => ({
   title: discussionTerm(postId), number, comments, category: { node_id: category, name: giscusConfig.category },
@@ -74,6 +81,8 @@ test('pagination reads the entire list before publishing counts or missing-term 
 })
 
 test('HTTP errors, network errors, and invalid response structures never become zero', async t => {
+  let now = Date.now()
+  t.mock.method(Date, 'now', () => now)
   const responses = [
     () => json({ message: 'Forbidden' }, 403), () => json({ message: 'Rate limited' }, 429),
     () => json({ message: 'Not Found' }, 404), () => { throw new TypeError('Failed to fetch') },
@@ -83,11 +92,59 @@ test('HTTP errors, network errors, and invalid response structures never become 
     () => json([item('duplicate', 1), item('duplicate', 2, 2)]),
   ]
   for (const [index, respond] of responses.entries()) {
+    now += 61_000
     t.mock.method(globalThis, 'fetch', async () => respond())
     const id = `failure-${index}`
     await refreshCommentCount(id, true)
     assert.deepEqual(getCommentState(id), unknown)
   }
+})
+
+test('rate limits survive force refresh and metadata signals until GitHub allows another request', async t => {
+  let now = 2_000_000_000_000
+  let calls = 0
+  t.mock.method(Date, 'now', () => now)
+  t.mock.method(globalThis, 'fetch', async () => {
+    calls++
+    return calls === 1
+      ? Response.json({ message: 'API rate limit exceeded' }, { status: 403, headers: { 'x-ratelimit-remaining': '0', 'x-ratelimit-reset': String((now + 120_000) / 1000) } })
+      : json([item('limited', 8)])
+  })
+  await refreshCommentCount('limited', true)
+  await refreshCommentCount('limited', true)
+  await receiveDiscussionCount('limited', metadata(2, 3))
+  assert.equal(calls, 1)
+  assert.deepEqual(getCommentState('limited'), unknown, 'partial widget replies are not a complete total')
+  receiveDiscussionNotFound('no-discussion')
+  assert.deepEqual(getCommentState('no-discussion'), { count: 0, status: 'ready' })
+  assert.deepEqual(getCommentState('unverified'), unknown)
+  now += 120_001
+  await refreshCommentCount('limited')
+  assert.equal(calls, 2)
+  assert.deepEqual(getCommentState('limited'), { count: 8, status: 'ready' })
+})
+
+test('confirmed empty widget stays zero after a failed request, and creation invalidates that zero', async t => {
+  let release!: () => void
+  t.mock.method(globalThis, 'fetch', async () => {
+    await new Promise<void>(resolve => { release = resolve })
+    return json({ message: 'Unavailable' }, 503)
+  })
+  const request = refreshCommentCount('empty-then-created', true)
+  await Promise.resolve()
+  receiveDiscussionNotFound('empty-then-created')
+  release()
+  await request
+  assert.deepEqual(getCommentState('empty-then-created'), { count: 0, status: 'ready' })
+  t.mock.method(globalThis, 'fetch', async () => json([item('empty-then-created', 5)]))
+  await receiveDiscussionCount('empty-then-created', metadata(1, 4))
+  assert.deepEqual(getCommentState('empty-then-created'), { count: 5, status: 'ready' })
+})
+
+test('verified zero metadata needs no additional GitHub request', async t => {
+  t.mock.method(globalThis, 'fetch', async () => { throw new Error('must not fetch') })
+  await receiveDiscussionCount('empty-metadata', metadata(0, 0))
+  assert.deepEqual(getCommentState('empty-metadata'), { count: 0, status: 'ready' })
 })
 
 test('a full twentieth page stops safely instead of declaring the list complete', async t => {
@@ -130,12 +187,21 @@ test('metadata validates repository, URL, and both counts; REST remains authorit
   ]) await receiveDiscussionCount('metadata-article', invalid)
   assert.equal(calls, 1)
   await receiveDiscussionCount('metadata-article', metadata())
-  assert.equal(calls, 2)
+  assert.equal(calls, 1, 'first metadata preserves the fresh complete cache')
   assert.deepEqual(getCommentState('metadata-article'), { count: 42, status: 'ready' }, 'do not substitute widget top-level count or its sum')
   await receiveDiscussionCount('metadata-article', metadata())
-  assert.equal(calls, 2, 'repeated periodic metadata must not refetch')
+  assert.equal(calls, 1, 'repeated periodic metadata must not refetch')
   await receiveDiscussionCount('metadata-article', metadata(2, 4))
-  assert.equal(calls, 3, 'a reply-only change also refreshes the total')
+  assert.equal(calls, 2, 'a reply-only change also refreshes the total')
+})
+
+test('first metadata refreshes a cached total that is lower than the widget already proves', async t => {
+  let calls = 0
+  t.mock.method(globalThis, 'fetch', async () => json([item('outdated-cache', ++calls === 1 ? 1 : 8)]))
+  await refreshCommentCount('outdated-cache')
+  await receiveDiscussionCount('outdated-cache', metadata(2, 3))
+  assert.equal(calls, 2)
+  assert.deepEqual(getCommentState('outdated-cache'), { count: 8, status: 'ready' })
 })
 
 test('metadata changes during a pending list coalesce into one follow-up refresh', { timeout: 3000 }, async t => {

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useSyncExternalStore } from 'react'
+import { readCommentCache, writeCommentCache } from './comment-cache.ts'
 
 export const giscusConfig = {
   host: 'https://giscus.app',
@@ -15,18 +16,51 @@ const initial: CommentState = { count: null, status: 'loading' }
 const states = new Map<string, CommentState>()
 const listeners = new Set<() => void>()
 const metadataSignatures = new Map<string, string>()
+const confirmedEmpty = new Map<string, number>()
+const invalidated = new Set<string>()
 const cacheDuration = 300_000
 const pageSize = 100
 const maxPages = 20
 let counts: Map<string, number> | null = null
 let lastAttemptAt: number | null = null
+let retryAt = 0
+let rateLimitedUntil = 0
+let cacheLoaded = false
+let metadataVersion = 0
 let pending: Promise<void> | null = null
 let metadataRefresh: Promise<void> | null = null
 let metadataDirty = false
 
 function cachedState(postId: string): CommentState {
+  if ((confirmedEmpty.get(postId) ?? 0) > Date.now()) return { count: 0, status: 'ready' }
+  if (invalidated.has(postId)) return { count: null, status: 'unavailable' }
   if (counts) return { count: counts.get(discussionTerm(postId)) ?? 0, status: 'ready' }
   return lastAttemptAt === null ? initial : { count: null, status: 'unavailable' }
+}
+
+function storage() {
+  try { return typeof window === 'undefined' ? null : window.localStorage } catch { return null }
+}
+
+function restoreCache() {
+  if (cacheLoaded) return
+  cacheLoaded = true
+  const cached = readCommentCache(storage(), Date.now(), giscusConfig.repo, giscusConfig.categoryId)
+  if (!cached) return
+  counts = cached.counts
+  lastAttemptAt = cached.attemptedAt
+  retryAt = cached.retryAt
+  if (!counts) rateLimitedUntil = retryAt
+  notifyAll()
+}
+
+/** Call only for the exact error emitted by this article's trusted Giscus iframe. */
+export function receiveDiscussionNotFound(postId: string) {
+  confirmedEmpty.set(postId, Date.now() + cacheDuration)
+  invalidated.delete(postId)
+  metadataSignatures.delete(postId)
+  getCommentState(postId)
+  notifyAll()
 }
 
 function notifyAll() {
@@ -57,9 +91,28 @@ export function receiveDiscussionCount(postId: string, discussion: unknown): Pro
   if (value.repository?.nameWithOwner !== giscusConfig.repo || !isDiscussionUrl(value.url) ||
       !isCount(value.totalCommentCount) || !isCount(value.totalReplyCount) ||
       (value.title !== undefined && value.title !== discussionTerm(postId))) return Promise.resolve()
+  // Reply metadata only covers loaded threads. Do not turn its partial sum into
+  // an exact total; zero top-level comments is the one unambiguous exception.
+  if (value.totalCommentCount === 0 && value.totalReplyCount === 0) {
+    receiveDiscussionNotFound(postId)
+    return Promise.resolve()
+  }
   const signature = `${value.url}:${value.totalCommentCount}:${value.totalReplyCount}`
-  if (metadataSignatures.get(postId) === signature) return metadataRefresh ?? pending ?? Promise.resolve()
+  const previousSignature = metadataSignatures.get(postId)
+  if (previousSignature === signature) return metadataRefresh ?? pending ?? Promise.resolve()
   metadataSignatures.set(postId, signature)
+  restoreCache()
+  // The first iframe message on a new page is not evidence of a change. Reuse
+  // the fresh complete list if it covers the widget's partial lower bound.
+  if (previousSignature === undefined && !pending && counts && Date.now() < retryAt &&
+      !confirmedEmpty.has(postId) && !invalidated.has(postId) &&
+      (counts.get(discussionTerm(postId)) ?? 0) >= value.totalCommentCount + value.totalReplyCount) {
+    return Promise.resolve()
+  }
+  confirmedEmpty.delete(postId)
+  invalidated.add(postId)
+  metadataVersion++
+  notifyAll()
 
   // A count may change while an earlier list is in flight. Coalesce those signals
   // into a follow-up so a stale response cannot swallow the update.
@@ -83,7 +136,17 @@ async function fetchAllCounts(): Promise<Map<string, number>> {
       credentials: 'omit', signal: AbortSignal.timeout(12_000),
       headers: { Accept: 'application/vnd.github+json' },
     })
-    if (!response.ok) throw new Error(`GitHub Discussions request failed: ${response.status}`)
+    if (!response.ok) {
+      const limited = response.status === 429 || (response.status === 403 && response.headers.get('x-ratelimit-remaining') === '0')
+      if (limited) {
+        const now = Date.now()
+        const reset = Number(response.headers.get('x-ratelimit-reset')) * 1000
+        const after = Number(response.headers.get('retry-after')) * 1000
+        const retry = Math.min(now + 3_600_000, Math.max(now + 60_000, Number.isFinite(reset) ? reset : 0, Number.isFinite(after) ? now + after : 0))
+        throw Object.assign(new Error('GitHub Discussions rate limited'), { retryAt: retry })
+      }
+      throw new Error(`GitHub Discussions request failed: ${response.status}`)
+    }
     const data: unknown = await response.json()
     if (!Array.isArray(data) || data.length > pageSize) throw new Error('Invalid GitHub Discussions list')
     for (const item of data) {
@@ -104,15 +167,29 @@ async function fetchAllCounts(): Promise<Map<string, number>> {
 }
 
 export function refreshCommentCount(postId: string, force = false): Promise<void> {
+  restoreCache()
   getCommentState(postId)
   if (pending) return pending
-  if (!force && lastAttemptAt !== null && Date.now() - lastAttemptAt < cacheDuration) return Promise.resolve()
+  if (Date.now() < rateLimitedUntil) return Promise.resolve()
+  if (!force && lastAttemptAt !== null && Date.now() < retryAt) return Promise.resolve()
   // Defer the work so pending is assigned even if a mocked or unavailable fetch throws synchronously.
   pending = Promise.resolve().then(async () => {
-    try { counts = await fetchAllCounts() }
-    catch { counts = null }
+    const version = metadataVersion
+    try {
+      counts = await fetchAllCounts()
+      retryAt = Date.now() + cacheDuration
+      rateLimitedUntil = 0
+      if (metadataVersion === version) invalidated.clear()
+    }
+    catch (error) {
+      counts = null
+      const limitedUntil = (error as { retryAt?: number })?.retryAt
+      retryAt = limitedUntil ?? Date.now() + 30_000
+      rateLimitedUntil = limitedUntil ?? 0
+    }
     finally {
       lastAttemptAt = Date.now()
+      writeCommentCache(storage(), { counts, attemptedAt: lastAttemptAt, retryAt }, giscusConfig.repo, giscusConfig.categoryId)
       pending = null
       notifyAll()
     }

@@ -43,7 +43,7 @@ draft: false
 
 使用 Giscus，读者通过 GitHub 账号登录；评论保存在公开仓库 [zhanghan-13/blog-comments](https://github.com/zhanghan-13/blog-comments) 的 Announcements 分类。网站本身不保存访问者凭据，也无需服务器或 GitHub 密钥。
 
-文章严格按 `post/<id>` 绑定讨论。GitHub App 仅安装在评论仓库。列表评论数通过公开 Discussions API 读取，包含回复并缓存五分钟；网络或限流失败显示 `—`，不会伪装成 0。
+文章严格按 `post/<id>` 绑定讨论。GitHub App 仅安装在评论仓库。列表评论数通过公开 Discussions API 读取，包含回复，并在浏览器内跨页面缓存五分钟；限流时等待 GitHub 指定的恢复时间再请求。计数请求失败不会把正常的评论框标记为不可用。只有完整接口结果或当前 Giscus 确认讨论不存在时显示 0，其他无法核实的计数显示 `—`。Giscus 的回复元数据只覆盖已加载内容，不用它的部分合计冒充总评论数。
 
 ## 内容与维护
 
