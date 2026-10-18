@@ -7,7 +7,7 @@ import { parse as parseYaml } from 'yaml'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = resolve(process.argv[2] || join(root, 'dist'))
-const site = 'https://zhanghan-13.github.io'
+const site = 'https://www.bugdesigner.cn'
 const errors = []
 const assert = (condition, message) => { if (!condition) errors.push(message) }
 if (!existsSync(dist)) throw new Error('No dist directory. Run astro build before verifying the output.')

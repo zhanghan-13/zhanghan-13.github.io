@@ -1,6 +1,6 @@
 # ZhangHan
 
-个人博客：**https://zhanghan-13.github.io**
+个人博客：**https://www.bugdesigner.cn**
 
 Astro 静态页面 + React / shadcn/ui 交互组件，使用 GitHub Actions 自动发布到 GitHub Pages。无需自建服务器。保留已确认的个人介绍、卡片文章列表、按月写作统计、归档、关于页、左侧吸顶目录、图片预览、代码高亮和明暗主题。
 
@@ -56,6 +56,6 @@ draft: false
 - `.github/workflows/deploy.yml`：自动构建和部署。
 - `scripts/migration-report.json`：首次迁移核对记录。
 
-GitHub 仓库 Settings → Pages 的发布来源应为 GitHub Actions。每次发布的状态在 Actions 的 Deploy website 中查看，失败不会替换当前在线版本。无需配置自定义域名或 CNAME。
+GitHub 仓库 Settings → Pages 的发布来源应为 GitHub Actions，自定义域名为 `www.bugdesigner.cn`，证书签发后开启 Enforce HTTPS。DNS 中 `www` 的 CNAME 指向 `zhanghan-13.github.io`。Actions 发布不依赖源码里的 CNAME 文件。每次发布的状态在 Actions 的 Deploy website 中查看，失败不会替换当前在线版本。
 
 资料：[Astro GitHub Pages 部署](https://docs.astro.build/en/guides/deploy/github/)、[shadcn/ui](https://ui.shadcn.com)、[Giscus](https://giscus.app/zh-CN)。

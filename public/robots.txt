@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zhanghan-13.github.io/sitemap-index.xml
+Sitemap: https://www.bugdesigner.cn/sitemap-index.xml
