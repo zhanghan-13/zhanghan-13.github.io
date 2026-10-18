@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 const social = [
   { label: 'GitHub', url: 'https://github.com/zhanghan-13', image: 'github.svg' },
   { label: 'Bilibili', url: 'https://space.bilibili.com/501122856', image: 'bilibili.svg' },
-  { label: '邮箱', url: 'mailto:han892577@qq.com', image: 'mail.svg' },
+  { label: '邮箱', url: 'mailto:han892577@163.com', image: 'mail.svg' },
 ]
 
 export default function ProfileIntro({ headingLevel = 1 }: { headingLevel?: 1 | 2 }) {
