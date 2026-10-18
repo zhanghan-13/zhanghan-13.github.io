@@ -6,6 +6,7 @@ import { Empty, EmptyHeader, EmptyTitle } from '@/components/ui/empty'
 import { Input } from '@/components/ui/input'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import type { PostSummary } from '@/lib/types'
+import './search-dialog.css'
 
 export default function HeaderControls({ posts }: { posts: PostSummary[] }) {
   const [dark, setDark] = useState(false)
@@ -45,7 +46,7 @@ export default function HeaderControls({ posts }: { posts: PostSummary[] }) {
       <Tooltip><TooltipTrigger asChild><Button variant="ghost" size="icon-touch" aria-label={dark ? '切换浅色主题' : '切换深色主题'} onClick={toggleTheme}>{dark ? <Sun /> : <Moon />}</Button></TooltipTrigger><TooltipContent sideOffset={6}>{dark ? '切换浅色主题' : '切换深色主题'}</TooltipContent></Tooltip>
     </div>
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="search-dialog" onCloseAutoFocus={event => { event.preventDefault(); searchButton.current?.focus() }}>
+      <DialogContent className="search-dialog" overlayClassName="search-overlay" onCloseAutoFocus={event => { event.preventDefault(); searchButton.current?.focus() }}>
         <DialogHeader><DialogTitle>搜索文章</DialogTitle><DialogDescription>在标题、摘要和标签中查找。</DialogDescription></DialogHeader>
         <label className="sr-only" htmlFor="site-search">搜索关键词</label>
         <Input id="site-search" autoFocus placeholder="搜索一个话题，例如 Redis…" value={query} onChange={event => setQuery(event.target.value)} />

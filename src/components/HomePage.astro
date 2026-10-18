@@ -2,7 +2,6 @@
 import SiteLayout from '@/layouts/SiteLayout.astro'
 import ProfileIntro from './ProfileIntro'
 import PostRows from './PostRows.astro'
-import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { getPostSummaries } from '@/lib/posts'
 interface Props { page?: number }
@@ -17,11 +16,11 @@ const pageUrl = (value: number) => value === 1 ? '/#recent-posts' : `/page/${val
     <section id="recent-posts" class="recent-posts">
       <div class="section-heading"><h2>最近文章</h2></div>
       <PostRows posts={posts.slice((page - 1) * 8, page * 8)} />
-      <nav class="pagination" aria-label="文章分页">
-        {page > 1 ? <a href={pageUrl(page - 1)} class="pagination-link" rel="prev"><ChevronLeft aria-hidden="true" />上一页</a> : <Button variant="ghost" size="touch" disabled><ChevronLeft data-icon="inline-start" />上一页</Button>}
-        <span>{page} <span class="muted">/ {lastPage}</span></span>
-        {page < lastPage ? <a href={pageUrl(page + 1)} class="pagination-link" rel="next">下一页<ChevronRight aria-hidden="true" /></a> : <Button variant="ghost" size="touch" disabled>下一页<ChevronRight data-icon="inline-end" /></Button>}
-      </nav>
+      {lastPage > 1 && <nav class="pagination" aria-label="文章分页">
+        {page > 1 && <a href={pageUrl(page - 1)} class="pagination-link pagination-prev" rel="prev"><ChevronLeft aria-hidden="true" />上一页</a>}
+        <span class="pagination-status">{page} <span class="muted">/ {lastPage}</span></span>
+        {page < lastPage && <a href={pageUrl(page + 1)} class="pagination-link pagination-next" rel="next">下一页<ChevronRight aria-hidden="true" /></a>}
+      </nav>}
     </section>
   </main>
 </SiteLayout>

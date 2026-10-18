@@ -9,7 +9,7 @@ interface Props { title?: string; description?: string; section?: string; noinde
 const { title = '博客', description = 'ZhangHan 的个人博客。一名软件工程师。', section = '/', noindex = false, article } = Astro.props
 const canonical = new URL(Astro.url.pathname === '/404/' ? '/404.html' : Astro.url.pathname, Astro.site).href
 const posts = await getPostSummaries()
-const nav = [{ path: '/', label: '博客' }, { path: '/writing/', label: '写作统计' }, { path: '/archive/', label: '归档' }, { path: '/about/', label: '关于我' }]
+const nav = [{ path: '/', label: '博客' }, { path: '/categories/', label: '分类' }, { path: '/writing/', label: '写作统计' }, { path: '/archive/', label: '归档' }, { path: '/about/', label: '关于我' }]
 const structuredData = article ? {
   '@context': 'https://schema.org', '@type': 'BlogPosting', headline: article.title,
   datePublished: `${article.date}T00:00:00+08:00`, author: { '@type': 'Person', name: 'ZhangHan', url: new URL('/about/', Astro.site).href },

@@ -1,0 +1,16 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro'
+import { getPostSummaries } from '@/lib/posts'
+import { createCategoryIndex } from '@/lib/categories'
+import { ArrowRight } from 'lucide-react'
+import '@/components/categories.css'
+const categories = createCategoryIndex(await getPostSummaries())
+---
+<SiteLayout title="分类" section="/categories/">
+  <main id="main" tabindex="-1" class="page categories-page">
+    <div class="page-heading"><h1>分类</h1></div>
+    <ul class="category-list">
+      {categories.map(category => <li><a href={category.url}><span>{category.name}</span><span class="category-count">{category.posts.length} 篇</span><ArrowRight aria-hidden="true" /></a></li>)}
+    </ul>
+  </main>
+</SiteLayout>

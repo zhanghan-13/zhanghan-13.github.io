@@ -11,6 +11,6 @@ const tags = new Set([...taxonomy.tags.map(item => item.name), ...posts.flatMap(
   <main id="main" tabindex="-1" class="page about-page">
     <div class="page-heading"><h1>关于我</h1></div>
     <ProfileIntro headingLevel={2} client:load />
-    <section class="about-blog"><h2>博客</h2><dl class="about-stats"><div><dd>{posts.length}</dd><dt>文章</dt></div><div><dd>{categories.size}</dd><dt>分类</dt></div><div><dd>{tags.size}</dd><dt>标签</dt></div></dl></section>
+    <section class="about-blog"><h2>博客</h2><dl class="about-stats"><div><dd>{posts.length}</dd><dt>文章</dt></div><div><dd><a href="/categories/" aria-label={`查看 ${categories.size} 个分类`}>{categories.size}</a></dd><dt>分类</dt></div><div><dd>{tags.size}</dd><dt>标签</dt></div></dl></section>
   </main>
 </SiteLayout>

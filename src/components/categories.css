@@ -1,0 +1,9 @@
+.category-list { margin:0; padding:0; list-style:none; border-top:1px solid var(--border); }
+.category-list a { display:flex; align-items:center; gap:20px; min-height:72px; padding:16px 0; border-bottom:1px solid var(--border); font-size:18px; font-weight:500; }
+.category-list a:hover > span:first-child { text-decoration:underline; }
+.category-list .category-count { margin-left:auto; color:var(--muted-foreground); font-size:13px; font-weight:400; font-variant-numeric:tabular-nums; }
+.category-list svg { width:16px; height:16px; color:var(--muted-foreground); }
+.category-page > .article-back { margin-bottom:22px; }
+.category-page .page-heading { margin-bottom:28px; }
+.category-note { margin-bottom:24px; color:var(--muted-foreground); font-size:13px; line-height:1.8; }
+.category-empty { color:var(--muted-foreground); font-size:15px; padding:24px 0; }

@@ -1,0 +1,20 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro'
+import PostRows from '@/components/PostRows.astro'
+import { ArrowLeft } from 'lucide-react'
+import { getPostSummaries } from '@/lib/posts'
+import { createCategoryIndex } from '@/lib/categories'
+import '@/components/categories.css'
+export async function getStaticPaths() {
+  return createCategoryIndex(await getPostSummaries()).map(category => ({ params: { slug: category.slug }, props: { category } }))
+}
+const { category } = Astro.props
+---
+<SiteLayout title={`${category.name} · 分类`} section="/categories/">
+  <main id="main" tabindex="-1" class="page category-page">
+    <a class="article-back" href="/categories/"><ArrowLeft aria-hidden="true" />所有分类</a>
+    <div class="page-heading"><h1>{category.name}</h1><span class="quiet-count">{category.posts.length} 篇文章</span></div>
+    {category.slug === 'uncategorized' && <p class="category-note">这些历史文章的分类信息未恢复。</p>}
+    {category.posts.length > 0 ? <PostRows posts={category.posts} /> : <p class="category-empty">暂无文章</p>}
+  </main>
+</SiteLayout>

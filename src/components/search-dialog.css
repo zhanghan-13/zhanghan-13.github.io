@@ -1,0 +1,18 @@
+/* Search needs a dimmed backdrop, without filtering the entire high-DPI page. */
+.search-overlay[data-slot="dialog-overlay"] {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.search-dialog[data-slot="dialog-content"] {
+  max-height: calc(100dvh - 2rem);
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+}
+
+.search-dialog .search-results {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable;
+  touch-action: pan-y pinch-zoom;
+}

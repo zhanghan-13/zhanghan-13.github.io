@@ -8,5 +8,5 @@ interface Props { posts: PostSummary[] }
 const { posts } = Astro.props
 ---
 <div class="post-list post-list-cards">
-  {posts.map(post => <article class="post-row"><a class="post-link" href={postUrl(post.id)}><div class="post-row-content"><h3>{post.title}</h3><p class="post-excerpt">{post.excerpt}</p><PostMeta post={post} showTags /></div><ArrowRight className="post-arrow" aria-hidden="true" /></a><Separator /></article>)}
+  {posts.map(post => <article class="post-row"><div class="post-link"><div class="post-row-content"><h3><a class="post-title-link" href={postUrl(post.id)}>{post.title}</a></h3><p class="post-excerpt">{post.excerpt}</p><PostMeta post={post} showTags /></div><ArrowRight className="post-arrow" aria-hidden="true" /></div><Separator /></article>)}
 </div>

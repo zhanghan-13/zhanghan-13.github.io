@@ -43,27 +43,65 @@ const headings = post.data.legacySlug ? post.data.headings : markdownHeadings.ma
   </div>
 </SiteLayout>
 <script>
+  import { activeArticleHeading, articleHeadingFromHash } from '@/lib/article-toc'
+
   const links = [...document.querySelectorAll<HTMLAnchorElement>('.toc-link')]
   const headings = [...document.querySelectorAll<HTMLElement>('.article-body :is(h1,h2,h3,h4,h5,h6)[id]')]
+  const headingIds = headings.map(heading => heading.id)
+  let anchorId = articleHeadingFromHash(location.hash, headingIds)
+  let activeId: string | undefined
   let queued = false
+  function select(id: string | undefined) {
+    if (id === activeId) return
+    activeId = id
+    links.forEach(link => link.dataset.heading === id ? link.setAttribute('aria-current', 'location') : link.removeAttribute('aria-current'))
+  }
   function update() {
     queued = false
-    let active = headings[0]?.id
-    const offset = window.innerWidth <= 640 ? 190 : window.innerWidth < 1100 ? 160 : 120
-    for (const heading of headings) if (heading.getBoundingClientRect().top <= offset) active = heading.id
-    links.forEach(link => link.dataset.heading === active ? link.setAttribute('aria-current', 'location') : link.removeAttribute('aria-current'))
+    const scrollY = window.scrollY
+    const root = document.documentElement
+    const padding = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0
+    const positions = headings.map(heading => ({
+      id: heading.id,
+      top: heading.getBoundingClientRect().top + scrollY,
+      offset: padding + (parseFloat(getComputedStyle(heading).scrollMarginTop) || 0),
+    }))
+    select(activeArticleHeading(positions, scrollY, Math.max(0, root.scrollHeight - root.clientHeight), anchorId))
   }
-  window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update) } }, { passive: true })
+  function scheduleUpdate() {
+    if (queued) return
+    queued = true
+    requestAnimationFrame(update)
+  }
+  window.addEventListener('scroll', scheduleUpdate, { passive: true })
+  window.addEventListener('resize', scheduleUpdate)
+  window.addEventListener('hashchange', () => {
+    anchorId = articleHeadingFromHash(location.hash, headingIds)
+    scheduleUpdate()
+  })
+  window.addEventListener('pageshow', scheduleUpdate)
+  document.fonts.ready.then(scheduleUpdate)
+  // Late images, code highlighting and the comment widget can change positions
+  // without a scroll event. Re-read geometry instead of caching heading tops.
+  const resizeObserver = new ResizeObserver(scheduleUpdate)
+  resizeObserver.observe(document.body)
+  const articleBody = document.querySelector('.article-body')
+  if (articleBody) resizeObserver.observe(articleBody)
+
   links.forEach(link => link.addEventListener('click', event => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
     const target = document.getElementById(link.dataset.heading || '')
     if (!target) return
     event.preventDefault()
     document.querySelector<HTMLDetailsElement>('.mobile-toc')?.removeAttribute('open')
-    history.replaceState(null, '', link.href)
-    target.scrollIntoView({ block: 'start' })
+    anchorId = target.id
+    select(anchorId)
+    // Native fragment navigation records scroll restoration for Back/Forward.
+    if (location.hash !== link.hash) location.hash = link.hash
+    target.scrollIntoView({ block: 'start', behavior: 'instant' })
     target.setAttribute('tabindex', '-1')
     target.focus({ preventScroll: true })
-    update()
+    scheduleUpdate()
   }))
   document.querySelectorAll<HTMLAnchorElement>('.article-body a[href]').forEach(link => {
     if (link.protocol === 'https:' || link.protocol === 'http:') {
