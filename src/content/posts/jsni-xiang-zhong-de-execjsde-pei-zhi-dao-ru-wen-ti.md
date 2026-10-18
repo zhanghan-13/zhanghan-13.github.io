@@ -3,7 +3,7 @@ id: "jsni-xiang-zhong-de-execjsde-pei-zhi-dao-ru-wen-ti"
 title: "JS逆向中的execjs的配置导入问题"
 date: "2023-11-28"
 excerpt: "本文共503字 一定要先这样导入 from functools import partial  # 锁定参数\n<"
-category: ""
+category: "爬虫"
 tags: ["js逆向"]
 wordCount: 170
 headings: []

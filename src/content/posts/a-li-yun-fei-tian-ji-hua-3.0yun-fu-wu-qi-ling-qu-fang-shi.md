@@ -3,7 +3,7 @@ id: "a-li-yun-fei-tian-ji-hua-3.0yun-fu-wu-qi-ling-qu-fang-shi"
 title: "阿里云飞天计划3.0云服务器领取方式"
 date: "2023-09-26"
 excerpt: "本文共497个字 阿里云最近可以白嫖云服务器，配置也不错2核2G，带宽1Mbps，40G云盘。"
-category: ""
+category: "教程"
 tags: ["阿里云云服务器"]
 wordCount: 434
 headings: [{"level":3,"id":"heading-1","text":"申请步骤"},{"level":3,"id":"heading-2","text":"踩坑点"}]

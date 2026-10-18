@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 1,
+  "recoveredOn": "2026-10-18",
+  "method": "Match original /archives/<id> links in archived Halo category listing cards; cross-check all 40 restored categories against WordPress article breadcrumbs with identical titles and publication dates.",
+  "summary": {
+    "totalArticles": 50,
+    "restoredCategories": 40,
+    "previouslyKnownCategories": 10,
+    "missingCategories": 0,
+    "conflicts": 0,
+    "counts": {
+      "教程": 10,
+      "后端": 18,
+      "随笔": 5,
+      "算法": 2,
+      "爬虫": 9,
+      "网站搭建": 3,
+      "前端": 3
+    }
+  },
+  "sources": [
+    {
+      "id": "categories--hou-duan.html",
+      "category": "后端",
+      "sourceUrl": "https://www.bugdesigner.cn/categories/hou-duan",
+      "snapshotUrl": "https://web.archive.org/web/20250808165138/https://www.bugdesigner.cn/categories/hou-duan",
+      "snapshotTimestamp": "20250808165138",
+      "sha256": "78ec81e02c04824f0d220c1f3f843f8460639894409387d36dd83e7c1ff10378"
+    },
+    {
+      "id": "categories--hou-duan--page--2.html",
+      "category": "后端",
+      "sourceUrl": "https://www.bugdesigner.cn/categories/hou-duan/page/2",
+      "snapshotUrl": "https://web.archive.org/web/20260207111222/https://www.bugdesigner.cn/categories/hou-duan/page/2",
+      "snapshotTimestamp": "20260207111222",
+      "sha256": "1cdab6254d55839bc3ea0270594c9fc63ab90af4124be8df1c6ef4b46e227be1"
+    },
+    {
+      "id": "categories--jiao-cheng.html",
+      "category": "教程",
+      "sourceUrl": "https://www.bugdesigner.cn/categories/jiao-cheng",
+      "snapshotUrl": "https://web.archive.org/web/20250808170737/https://www.bugdesigner.cn/categories/jiao-cheng",
+      "snapshotTimestamp": "20250808170737",
+      "sha256": "d2b9f7c398ec1b9cf6c423cc6facbfbf06005b8a28007e285df39626f5a15292"
+    },
+    {
+      "id": "categories--qian-duan.html",
+      "category": "前端",
+      "sourceUrl": "https://www.bugdesigner.cn/categories/qian-duan",
+      "snapshotUrl": "https://web.archive.org/web/20250808174758/https://www.bugdesigner.cn/categories/qian-duan",
+      "snapshotTimestamp": "20250808174758",
+      "sha256": "8e51394f5ce3d77beec4cc57ec270b8fda812db0ffaaf3899f06dae4b506ff1e"
+    },
+    {
+      "id": "categories--suan-fa.html",
+      "category": "算法",
+      "sourceUrl": "https://www.bugdesigner.cn/categories/suan-fa",
+      "snapshotUrl": "https://web.archive.org/web/20250808171239/https://www.bugdesigner.cn/categories/suan-fa",
+      "snapshotTimestamp": "20250808171239",
+      "sha256": "2ef969e180222a07efa7168245f4a6189e1e9da100d02cb7ae68f67242026e4e"
+    },
+    {
+      "id": "categories--pa-chong.html",
+      "category": "爬虫",
+      "sourceUrl": "https://www.bugdesigner.cn/categories/pa-chong",
+      "snapshotUrl": "https://web.archive.org/web/20250808175107/https://www.bugdesigner.cn/categories/pa-chong",
+      "snapshotTimestamp": "20250808175107",
+      "sha256": "6184a1f36b82de9b9c60e54c9499cd7081fdcac5e14f84fef28e2e7ed85c5fff"
+    },
+    {
+      "id": "categories--wang-zhan-da-jian.html",
+      "category": "网站搭建",
+      "sourceUrl": "https://www.bugdesigner.cn/categories/wang-zhan-da-jian",
+      "snapshotUrl": "https://web.archive.org/web/20250808175537/https://www.bugdesigner.cn/categories/wang-zhan-da-jian",
+      "snapshotTimestamp": "20250808175537",
+      "sha256": "878d1db6a336c413ecec7518aeee0df1f30263d055913e6d3c81d37638eb3a21"
+    },
+    {
+      "id": "categories--sui-bi.html",
+      "category": "随笔",
+      "sourceUrl": "https://www.bugdesigner.cn/categories/sui-bi",
+      "snapshotUrl": "https://web.archive.org/web/20250808175815/https://www.bugdesigner.cn/categories/sui-bi",
+      "snapshotTimestamp": "20250808175815",
+      "sha256": "e9bab530a08f7de1e7ad7db0d14a88947d1a6592b405cb73962584ebca3f911a"
+    }
+  ],
+  "articles": {
+    "a-li-yun-fei-tian-ji-hua-3.0yun-fu-wu-qi-ling-qu-fang-shi": {
+      "category": "教程",
+      "sources": [
+        "categories--jiao-cheng.html"
+      ]
+    },
+    "dockerbu-shu-javaxiang-mu-de-bu-zou": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan--page--2.html"
+      ]
+    },
+    "dong-zhao-jing-yan-tie": {
+      "category": "随笔",
+      "sources": [
+        "categories--sui-bi.html"
+      ]
+    },
+    "electron-vue3wan-zheng-da-bao-jiao-cheng": {
+      "category": "教程",
+      "sources": [
+        "categories--jiao-cheng.html"
+      ]
+    },
+    "es8.xcha-xun-cai-keng-zhi-nan": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan.html"
+      ]
+    },
+    "floydgui-tu-sai-pao-suan-fa-huan-xing-lian-biao-xiang-guan-wen-ti": {
+      "category": "算法",
+      "sources": [
+        "categories--suan-fa.html"
+      ]
+    },
+    "javadiao-yong-pythoncheng-xu": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan.html"
+      ]
+    },
+    "jebyun-xing-shan-tui-wen-ti": {
+      "category": "爬虫",
+      "sources": [
+        "categories--pa-chong.html"
+      ]
+    },
+    "jie-jue-es-7.14ban-ben-hou-xu-yao-pei-zhi-mi-ma-de-wen-ti": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan.html"
+      ]
+    },
+    "jie-jue-guan-yu-bao-ta-httpszheng-shu-suo-you-bu-shu-wen-ti": {
+      "category": "网站搭建",
+      "sources": [
+        "categories--wang-zhan-da-jian.html"
+      ]
+    },
+    "jie-jue-python-loggingmo-kuai-xie-ru-ri-zhi-wen-jian-hou-luan-ma-he-cun-zai-escwen-ti": {
+      "category": "爬虫",
+      "sources": [
+        "categories--pa-chong.html"
+      ]
+    },
+    "jie-jue-rabbitmqde-chuang-jian-dui-lie-shi-bai-wen-ti": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan.html"
+      ]
+    },
+    "jie-jue-spring-ai-messagecun-ru-rediswu-fa-zheng-chang-fan-xu-lie-hua-wen-ti": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan--page--2.html"
+      ]
+    },
+    "jie-jue-springcloudgatewayji-cheng-knife4jwen-dang": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan--page--2.html"
+      ]
+    },
+    "jie-jue-vscodezuo-jian-dian-ji-tiao-zhuan-dao-mu-biao-wen-ti": {
+      "category": "前端",
+      "sources": [
+        "categories--qian-duan.html"
+      ]
+    },
+    "jsni-xiang-zhong-de-execjsde-pei-zhi-dao-ru-wen-ti": {
+      "category": "爬虫",
+      "sources": [
+        "categories--pa-chong.html"
+      ]
+    },
+    "knife4jqing-qiu-wen-dang-yi-chang": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan--page--2.html"
+      ]
+    },
+    "knife4jwang-guan-ju-he-wen-dang-wen-ti": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan.html"
+      ]
+    },
+    "mei-hua-wordpress-markdowndai-ma-wen-ti": {
+      "category": "网站搭建",
+      "sources": [
+        "categories--wang-zhan-da-jian.html"
+      ]
+    },
+    "mian-fei-tu-pian-zi-yuan-wang-zhan-zheng-li": {
+      "category": "教程",
+      "sources": [
+        "categories--jiao-cheng.html"
+      ]
+    },
+    "mou-lian-tong-ni-xiang-fu-shu-ju-fen-xi-jie-guo": {
+      "category": "爬虫",
+      "sources": [
+        "categories--pa-chong.html"
+      ]
+    },
+    "mou-yi-you-dao-fan-yi-ni-xiang": {
+      "category": "爬虫",
+      "sources": [
+        "categories--pa-chong.html"
+      ]
+    },
+    "mou-zhun-wang-ni-xiang": {
+      "category": "爬虫",
+      "sources": [
+        "categories--pa-chong.html"
+      ]
+    },
+    "mybatis-plusgeng-xin-shi-zi-dong-tiao-guo-nullzi-duan": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan--page--2.html"
+      ]
+    },
+    "mybatisdong-tai-sqlzong-jie": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan--page--2.html"
+      ]
+    },
+    "ni-xiang-bzhan-shua-bo-fang-liang": {
+      "category": "爬虫",
+      "sources": [
+        "categories--pa-chong.html"
+      ]
+    },
+    "phpstudykai-fa-huan-jing-da-jian-cai-keng-dian": {
+      "category": "教程",
+      "sources": [
+        "categories--jiao-cheng.html"
+      ]
+    },
+    "picgo-typorashang-chuan-tu-pian-shi-qia-si-de-jie-jue-fang-an": {
+      "category": "网站搭建",
+      "sources": [
+        "categories--wang-zhan-da-jian.html"
+      ]
+    },
+    "qian-tan-kai-yuan-mian-fei": {
+      "category": "随笔",
+      "sources": [
+        "categories--sui-bi.html"
+      ]
+    },
+    "rang-ni-de-githubzhu-ye-geng-you-ji-ke-fan": {
+      "category": "前端",
+      "sources": [
+        "categories--qian-duan.html"
+      ]
+    },
+    "redisming-ling-ti-shi-bu-xian-shi-de-jie-jue-fang-an": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan--page--2.html"
+      ]
+    },
+    "ru-he-bi-mian-mian-xiang-jian-yu-bian-cheng-pa-chong-zhen-de-wei-fa-ma": {
+      "category": "教程",
+      "sources": [
+        "categories--jiao-cheng.html"
+      ]
+    },
+    "scrapy-redisfen-bu-shi-pa-qu-shu-ju": {
+      "category": "爬虫",
+      "sources": [
+        "categories--pa-chong.html"
+      ]
+    },
+    "scrcpy-an-zhuo-she-bei-tou-ping-dao-dian-nao-shi-yong-jiao-cheng": {
+      "category": "教程",
+      "sources": [
+        "categories--jiao-cheng.html"
+      ]
+    },
+    "shi-yong-spring-initializerchu-shi-hua-springboot3.xxiang-mu-shi-mavenyi-lai-xia-zai-shi-bai-wen-ti": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan--page--2.html"
+      ]
+    },
+    "soloya-tai-sai-guo-er-he-mathorcupguo-san-wo-de-dao-liao-shi-me": {
+      "category": "随笔",
+      "sources": [
+        "categories--sui-bi.html"
+      ]
+    },
+    "vitepressda-jian-bing-bu-shu-wang-zhan": {
+      "category": "教程",
+      "sources": [
+        "categories--jiao-cheng.html"
+      ]
+    },
+    "wakatimeru-he-geng-xin-zi-ji-de-api-key": {
+      "category": "教程",
+      "sources": [
+        "categories--jiao-cheng.html"
+      ]
+    },
+    "wei-fu-wu-xiang-mu-bu-shu": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan.html"
+      ]
+    },
+    "wei-fu-wu-xiang-mu-java8sheng-ji-zhi-nan": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan.html"
+      ]
+    },
+    "wei-shi-me-zai-controllerzhong-yao-xiao-yan-can-shu": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan.html"
+      ]
+    },
+    "win10you-jian-da-kai-wen-jian-jia-kuai-jie-fang-shi-de-she-zhi": {
+      "category": "教程",
+      "sources": [
+        "categories--jiao-cheng.html"
+      ]
+    },
+    "yi-ci-ban-ben-wen-ti-yin-fa-de-nge-bugde-si-kao": {
+      "category": "前端",
+      "sources": [
+        "categories--qian-duan.html"
+      ]
+    },
+    "yi-ci-gen-leaderji-shu-xuan-xing-xian-liao-de-si-kao": {
+      "category": "随笔",
+      "sources": [
+        "categories--sui-bi.html"
+      ]
+    },
+    "yi-ge-bo-ke-jie-jue-gptshi-yong-he-kai-tong-plussuo-you-wen-ti": {
+      "category": "教程",
+      "sources": [
+        "categories--jiao-cheng.html"
+      ]
+    },
+    "yi-ge-bo-ke-zong-jie-shi-da-pai-xu-suan-fa": {
+      "category": "算法",
+      "sources": [
+        "categories--suan-fa.html"
+      ]
+    },
+    "yi-ge-wen-zhang-jie-jue-suo-you-guan-yu.gitignorede-wen-ti": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan.html"
+      ]
+    },
+    "yi-zhan-shi-jie-jue-openfeigndiao-yong-wen-ti": {
+      "category": "后端",
+      "sources": [
+        "categories--hou-duan.html"
+      ]
+    },
+    "zhi-yuan-jun-xiong-bing-chu-ji-guan-hou-gan": {
+      "category": "随笔",
+      "sources": [
+        "categories--sui-bi.html"
+      ]
+    },
+    "zhongkao_mirgate": {
+      "category": "爬虫",
+      "sources": [
+        "categories--pa-chong.html"
+      ]
+    }
+  }
+}

@@ -3,7 +3,7 @@ id: "shi-yong-spring-initializerchu-shi-hua-springboot3.xxiang-mu-shi-mavenyi-la
 title: "使用spring initializer初始化springboot3.x项目时maven依赖下载失败问题"
 date: "2023-12-26"
 excerpt: "最近在开发一个springboot五子棋AI项目，想着使用idea自带的初始化器初始化一个项目，没想到刚创建项目的时候就报错了，报错信息是： org.springframework.boot:spring-boot-starter-parent:pom:3.1.6 failed to transfe"
-category: ""
+category: "后端"
 tags: ["maven","springboot3"]
 wordCount: 377
 headings: []

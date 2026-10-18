@@ -3,7 +3,7 @@ id: "jebyun-xing-shan-tui-wen-ti"
 title: "JEB运行闪退问题"
 date: "2023-11-28"
 excerpt: "本文共436个字 jeb是一款静态调试和动态分析工具，但是正版pro是需要收费的，我们在下载的时候一般都是下盗版。盗版文件就衍生出来了这样一个问题，就是版本不是最新的。我这里的jeb版本是4.20.支持的jdk版本为11，（有的版本是2.X或者3.X，就对应jdk8以下和jdk8）。 在双击jeb_"
-category: ""
+category: "爬虫"
 tags: ["jeb","安卓逆向"]
 wordCount: 349
 headings: []

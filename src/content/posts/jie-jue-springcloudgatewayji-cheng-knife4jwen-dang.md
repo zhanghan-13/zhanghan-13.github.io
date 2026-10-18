@@ -3,7 +3,7 @@ id: "jie-jue-springcloudgatewayji-cheng-knife4jwen-dang"
 title: "解决SpringCloudGateway集成knife4j文档"
 date: "2024-05-04"
 excerpt: "前言 无力吐槽，不知道是knife4j的问题还是swagger的问题，这个微服务网关集成路径问题折磨了我两个小时，官方文档的配置也跑不起来，作者联系不上，交流群加不进去,网上的资源也很少，大多数不清不楚的，下面总结一下怎么能让这个微服务网关跑起来。 版本：springboot2.3.7.RELEAS"
-category: ""
+category: "后端"
 tags: ["knife4j","spring cloud gateway"]
 wordCount: 807
 headings: [{"level":2,"id":"heading-1","text":"前言"},{"level":2,"id":"heading-2","text":"引入依赖"},{"level":2,"id":"heading-3","text":"出现问题"},{"level":2,"id":"heading-4","text":"解决方法"},{"level":2,"id":"heading-5","text":"PS"}]

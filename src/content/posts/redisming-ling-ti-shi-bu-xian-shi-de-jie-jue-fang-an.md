@@ -3,7 +3,7 @@ id: "redisming-ling-ti-shi-bu-xian-shi-de-jie-jue-fang-an"
 title: "Redis命令提示不显示的解决方案"
 date: "2023-10-04"
 excerpt: "本文共1100字 原因 网上还没有这种问题的解决方案。如果使用docker直接从dockerhub拉取redis镜像的话，我猜想redis官方应该是为了轻量考虑没有在镜像里面的redis-cli里面内置linenoise这个库，因此redis-cli的命令提示功能就没有了。 解决方案 但是我们在学习"
-category: ""
+category: "后端"
 tags: ["docker","redis","命令提示"]
 wordCount: 718
 headings: [{"level":2,"id":"heading-1","text":"原因"},{"level":2,"id":"heading-2","text":"解决方案"}]

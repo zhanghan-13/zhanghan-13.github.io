@@ -3,7 +3,7 @@ id: "vitepressda-jian-bing-bu-shu-wang-zhan"
 title: "vitepress搭建并部署网站"
 date: "2024-01-10"
 excerpt: "前言 首先，明确一点，不要轻易用最新的版本！！！很多开源项目文档写的真的太简练了，个人觉得不太适合小白，给个QA区也好啊。最后我们在遇到问题的时候解决方案一般有三条： 去网上搜索，看别人写的博客 问gpt 问别人（效率最低，特别是对于不会提问的同学） 对开源项目来说，还有两条 去github的iss"
-category: ""
+category: "教程"
 tags: ["github pages","vitepress","部署网站"]
 wordCount: 3210
 headings: [{"level":2,"id":"heading-1","text":"前言"},{"level":2,"id":"heading-2","text":"创建项目"},{"level":2,"id":"heading-3","text":"自定义配置"},{"level":3,"id":"heading-4","text":"美化主页"},{"level":3,"id":"heading-5","text":"主页扩展"},{"level":3,"id":"heading-6","text":"美化文章页"},{"level":3,"id":"heading-7","text":"文章页扩展"},{"level":3,"id":"heading-8","text":"美化地址栏icon"},{"level":3,"id":"heading-9","text":"设置搜索框"},{"level":2,"id":"heading-10","text":"使用Github Pages部署"},{"level":3,"id":"heading-11","text":"部署步骤"},{"level":3,"id":"heading-12","text":"配置自定义域名"},{"level":2,"id":"heading-13","text":"补充"}]

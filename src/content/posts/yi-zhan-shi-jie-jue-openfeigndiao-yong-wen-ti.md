@@ -3,7 +3,7 @@ id: "yi-zhan-shi-jie-jue-openfeigndiao-yong-wen-ti"
 title: "一站式解决openfeign调用问题"
 date: "2024-05-12"
 excerpt: "openfeign是一个远程调用的HTTP客户端，不上RPC框架的时候使用它还是挺香的，使用具体就是下面这四步 flowchart LR\n导入依赖-->定义feign方法-->开启feign-->注入并调用 这次来说说我遇到的三个问题。 传输类型是对象时解码错误 报错信息如下： feign.code"
-category: ""
+category: "后端"
 tags: ["openfeign","rpc","微服务"]
 wordCount: 543
 headings: []

@@ -3,7 +3,7 @@ id: "ru-he-bi-mian-mian-xiang-jian-yu-bian-cheng-pa-chong-zhen-de-wei-fa-ma"
 title: "如何避免面向监狱编程，爬虫真的违法吗"
 date: "2024-01-18"
 excerpt: "爬虫写得好，牢饭吃到饱。 首先大家看到的案例几乎是个例，可以说就算你违法，只要企业不起诉你，还是有很大概率不抓你的，（一般来说这个东西一种程度也是互利共赢的，你爬数据也是变相给对方的数据变的好看了一点）但是天网恢恢，疏而不漏啊。 国内是比较偏向企业的，无论是劳动仲裁，打官司这些的，爬虫也是这样，一般"
-category: ""
+category: "教程"
 tags: []
 wordCount: 853
 headings: [{"level":2,"id":"heading-1","text":"爬取什么违法"},{"level":2,"id":"heading-2","text":"案例分享"},{"level":2,"id":"heading-3","text":"常见QA"},{"level":2,"id":"heading-4","text":"建议"},{"level":2,"id":"heading-5","text":"参考文章"}]

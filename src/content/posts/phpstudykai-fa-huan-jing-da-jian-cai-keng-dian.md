@@ -3,7 +3,7 @@ id: "phpstudykai-fa-huan-jing-da-jian-cai-keng-dian"
 title: "phpstudy开发环境搭建踩坑点"
 date: "2023-10-29"
 excerpt: "本文共879个字 前言 最近在学习这门世界上最好的语言，搭建开发环境的时候踩了一些坑，接下来记录一下。 具体坑点 502服务器无法处理请求 这个错误是本篇文章产生"
-category: ""
+category: "教程"
 tags: ["PHP","环境搭建"]
 wordCount: 599
 headings: [{"level":2,"id":"heading-1","text":"前言"},{"level":2,"id":"heading-2","text":"具体坑点"},{"level":3,"id":"heading-3","text":"502服务器无法处理请求"},{"level":3,"id":"heading-4","text":"提示nginx启动不成功"},{"level":3,"id":"heading-5","text":"MySQL冲突问题"},{"level":3,"id":"heading-6","text":"杂篇"}]

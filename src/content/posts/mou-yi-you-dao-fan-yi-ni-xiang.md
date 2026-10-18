@@ -3,7 +3,7 @@ id: "mou-yi-you-dao-fan-yi-ni-xiang"
 title: "某易有道翻译逆向"
 date: "2023-11-19"
 excerpt: "分析网站 分析payload 从下图可以看出，sign99%是需要逆向的，mysticTime98%也是需要逆向的（推测结合生成sign），不然传过去这个参数干嘛。其他的参数都很随意，像yduuid这种99%是不需逆向 分析请求头 都是很常规的，不需逆向"
-category: ""
+category: "爬虫"
 tags: ["AES","js逆向","md5"]
 wordCount: 1534
 headings: [{"level":2,"id":"heading-1","text":"分析网站"},{"level":2,"id":"heading-2","text":"寻找加密入口"},{"level":2,"id":"heading-3","text":"寻找解密入口"},{"level":2,"id":"heading-4","text":"Python代码复现"},{"level":2,"id":"heading-5","text":"总结"}]

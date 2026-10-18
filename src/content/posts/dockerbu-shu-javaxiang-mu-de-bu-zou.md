@@ -3,7 +3,7 @@ id: "dockerbu-shu-javaxiang-mu-de-bu-zou"
 title: "Docker部署Java项目的步骤"
 date: "2023-10-11"
 excerpt: "本文共6017个字 Docker的介绍 Docker部署项目非常简便快速一致。对于一些常见的软件如MySQL，nginx等，都可以一键从DockerHub里面拉取下来（基本常用的软件都有软件官方负责维护的镜像）。相较于传统的部署，手动去找安装包然后传到服务器上进行解压一行一行敲各种命令，Docker"
-category: ""
+category: "后端"
 tags: ["docker","Java"]
 wordCount: 2926
 headings: [{"level":2,"id":"heading-1","text":"Docker的介绍"},{"level":2,"id":"heading-2","text":"详细流程"},{"level":3,"id":"heading-3","text":"安装Docker"},{"level":3,"id":"heading-4","text":"安装Mysql(Latest)"},{"level":3,"id":"heading-5","text":"安装Nginx(Latest)"},{"level":3,"id":"heading-6","text":"编写DockerFile文件运行jar包"},{"level":2,"id":"heading-7","text":"大招—>DockerCompose"},{"level":2,"id":"heading-8","text":"番外篇(踩坑点)"}]

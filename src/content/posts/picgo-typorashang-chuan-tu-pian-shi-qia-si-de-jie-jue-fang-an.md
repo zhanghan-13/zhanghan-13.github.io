@@ -3,7 +3,7 @@ id: "picgo-typorashang-chuan-tu-pian-shi-qia-si-de-jie-jue-fang-an"
 title: "PicGo+Typora上传图片时卡死的解决方案"
 date: "2023-09-27"
 excerpt: "本文共182个字 最近在使用PicGo上传图片的时候发现怎么都上传不上去，期间多次重启电脑，重置网络设置，还是没用。一直在uploading，打开PicGo也是奇卡无比。后来去网上一搜才发现，原来是没有设置内置剪切板的问题，我猜想应该是PicGo在上传图片到图床的时候去windows系统找剪切板，但"
-category: ""
+category: "网站搭建"
 tags: ["PicGo","图床"]
 wordCount: 146
 headings: []

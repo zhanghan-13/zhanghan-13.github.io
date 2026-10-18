@@ -3,7 +3,7 @@ id: "mybatisdong-tai-sqlzong-jie"
 title: "Mybatis动态sql总结"
 date: "2023-12-26"
 excerpt: "forEach详解 在使用动态sql<foreach>语句时collection写list或者@Param注解里面指定的名称都行，item是每一个元素的别名，注意引用时候跟外部方法参数引用方式一样，#{item.name}......，不加占位符会出现难以预料的问题   <delete id=\"de"
-category: ""
+category: "后端"
 tags: ["mybatis"]
 wordCount: 867
 headings: [{"level":2,"id":"heading-1","text":"forEach详解"},{"level":2,"id":"heading-2","text":"resultMap详解"},{"level":2,"id":"heading-3","text":"Mybatis其他小点"}]

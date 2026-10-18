@@ -3,7 +3,7 @@ id: "electron-vue3wan-zheng-da-bao-jiao-cheng"
 title: "electron+Vue3完整打包教程"
 date: "2024-02-02"
 excerpt: "前言 本教程的应用结构：AZCodingAccount/iTime: 基于electron、vue3、Arco Design的桌面端效率软件 (github.com) 恕我直言，网上的electron打包教程10个里面有9坨。踩了5个小时的坑才整完，看了几十个文章，基本没一个可以把一个大项目完整打下"
-category: ""
+category: "教程"
 tags: ["electron","electron-builder","vue"]
 wordCount: 1541
 headings: [{"level":2,"id":"heading-1","text":"前言"},{"level":2,"id":"heading-2","text":"详细步骤"},{"level":2,"id":"heading-3","text":"优化大小"},{"level":2,"id":"heading-4","text":"最后"}]

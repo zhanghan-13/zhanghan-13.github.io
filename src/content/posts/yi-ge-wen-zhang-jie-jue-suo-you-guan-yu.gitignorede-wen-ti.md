@@ -3,7 +3,7 @@ id: "yi-ge-wen-zhang-jie-jue-suo-you-guan-yu.gitignorede-wen-ti"
 title: "一个文章解决所有关于.gitignore的问题"
 date: "2024-05-14"
 excerpt: "idea让我迷惑的操作 最近遇到了一个神奇的bug，idea添加文件会问你要不要添加到git仓库，如果你不添加，这个是一个颜色是忽略的颜色。但是我又想添加进去了，这个时候你单独添加一个文件是可以的，但是右键添加整个文件夹却不行，接下来先说我的问题的解决： 原理：idea你不添加到git里面会默认往"
-category: ""
+category: "后端"
 tags: [".gitignore","git"]
 wordCount: 596
 headings: [{"level":2,"id":"heading-1","text":"idea让我迷惑的操作"},{"level":2,"id":"heading-2","text":"补充.gitignore还可能出现的问题"}]

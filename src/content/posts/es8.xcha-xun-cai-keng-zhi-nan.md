@@ -3,7 +3,7 @@ id: "es8.xcha-xun-cai-keng-zhi-nan"
 title: "ES8.x查询踩坑指南"
 date: "2024-05-25"
 excerpt: "不知道是不是版本问题，但肯定是8.x的锅，就是构建完条件以后执行查询时候反序列化老是出现问题，具体如下面这行代码，还是在elastic讨论社区才找到答案：https://discuss.elastic.co/t/jsonp-mapping-exception/306992     SearchRes"
-category: ""
+category: "后端"
 tags: ["DSL","elastic search8","反序列化"]
 wordCount: 473
 headings: [{"level":2,"id":"%E5%AE%9E%E4%BD%93%E7%B1%BB%E9%85%8D%E7%BD%AE","text":"实体类配置"},{"level":2,"id":"%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BA%8F%E5%88%97%E5%8C%96%E5%99%A8%E9%85%8D%E7%BD%AE","text":"自定义序列化器配置"}]

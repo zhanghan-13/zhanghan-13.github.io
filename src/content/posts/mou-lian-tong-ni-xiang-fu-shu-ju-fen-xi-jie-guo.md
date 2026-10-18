@@ -3,7 +3,7 @@ id: "mou-lian-tong-ni-xiang-fu-shu-ju-fen-xi-jie-guo"
 title: "某练通逆向（附数据分析结果）"
 date: "2024-01-01"
 excerpt: "背景 背景是23年11月末时候有个人找到我说想打个省标，我问预算多少，我跟他要600，结果他跟我说别人都是200零基础问我200能不能打，我当时就震惊了，一年多没正经打过代练，现在代练行业都这么玩了吗？ 正好当时在学APP逆向，由于跟dlt太熟悉了，我就把某代练通的搜索接口和分页查询接口给逆向了，这"
-category: ""
+category: "爬虫"
 tags: ["dlt","数据分析"]
 wordCount: 3118
 headings: [{"level":2,"id":"heading-1","text":"背景"},{"level":2,"id":"heading-2","text":"逆向思路"},{"level":3,"id":"heading-3","text":"环境的选择"},{"level":3,"id":"heading-4","text":"逆向思路"},{"level":3,"id":"heading-5","text":"python完成业务逻辑"},{"level":2,"id":"heading-6","text":"数据分析结果"},{"level":3,"id":"heading-7","text":"关于对英雄的分析结果"},{"level":3,"id":"heading-8","text":"关于对所有订单的分析结果"},{"level":4,"id":"heading-9","text":"游戏大区分布"},{"level":4,"id":"heading-10","text":"发单者和订单数的相关关系"},{"level":4,"id":"heading-11","text":"价格等的描述性统计"},{"level":4,"id":"heading-12","text":"每个段位的价格问题"},{"level":2,"id":"heading-13","text":"写在后面"}]

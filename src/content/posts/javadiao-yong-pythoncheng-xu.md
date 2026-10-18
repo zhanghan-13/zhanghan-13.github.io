@@ -3,7 +3,7 @@ id: "javadiao-yong-pythoncheng-xu"
 title: "Java调用python程序"
 date: "2024-05-14"
 excerpt: "我的程序要使用python爬虫来爬取大学教务在线的数据，当然Java也有，但是碍于学习成本还是使用Python爬比较好。 关于爬取但是现在有两种解决方案， 一种是python爬到数据由程序自己写入到指定的数据库 另一种是通过某种方式把python爬到的数据传递给java，由java程序写入到数据库"
-category: ""
+category: "后端"
 tags: []
 wordCount: 336
 headings: []

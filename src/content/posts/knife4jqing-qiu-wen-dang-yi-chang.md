@@ -3,7 +3,7 @@ id: "knife4jqing-qiu-wen-dang-yi-chang"
 title: "Knife4j请求文档异常"
 date: "2024-04-26"
 excerpt: "首先说结论，现在knife4j封装的很好，不写任何配置和配置类都可以访问到，也不需要引入swagger和springdoc（knife4j引入，maven会传递），请求文档异常一般是路径和版本问题。我这里遇到的版本问题，版本问题永远是非常严重的问题 springboot版本3.2.5 对应knife"
-category: ""
+category: "后端"
 tags: []
 wordCount: 190
 headings: []

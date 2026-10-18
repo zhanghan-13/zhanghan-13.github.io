@@ -3,7 +3,7 @@ id: "jie-jue-es-7.14ban-ben-hou-xu-yao-pei-zhi-mi-ma-de-wen-ti"
 title: "解决ES 7.14版本后需要配置密码的问题"
 date: "2024-05-23"
 excerpt: "首先是ES和kibana的下载，下面这个网址就可以，很香Past Releases of Elastic Stack Software | Elastic，如果你安装的新版本，不显式开启密码验证，使用的时候很烦，上面会弹出一个注释提醒你去开启 #! Elasticsearch built-in se"
-category: ""
+category: "后端"
 tags: ["elastic-search","微服务"]
 wordCount: 334
 headings: []

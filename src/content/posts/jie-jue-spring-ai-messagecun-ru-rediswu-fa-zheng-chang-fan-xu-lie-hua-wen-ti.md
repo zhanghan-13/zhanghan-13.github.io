@@ -3,7 +3,7 @@ id: "jie-jue-spring-ai-messagecun-ru-rediswu-fa-zheng-chang-fan-xu-lie-hua-wen-t
 title: "解决Spring AI message存入Redis无法正常反序列化问题"
 date: "2024-05-10"
 excerpt: "前言 版本：springboot3.2.4+spring ai1.0.0SNAPSHOT+redis-windows5 果然不用新版本确实，引入新版本以前的许多配置都过时了，我大概试了6、7种，后来自己都看懂那些配置啥作用了，还是没有试成功，后来我就怀疑是不是SpringAI的message接口有问"
-category: ""
+category: "后端"
 tags: []
 wordCount: 792
 headings: [{"level":3,"id":"heading-1","text":"前言"}]

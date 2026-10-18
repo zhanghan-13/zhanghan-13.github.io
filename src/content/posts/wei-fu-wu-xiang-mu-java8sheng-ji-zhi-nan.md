@@ -3,7 +3,7 @@ id: "wei-fu-wu-xiang-mu-java8sheng-ji-zhi-nan"
 title: "微服务项目Java8升级指南"
 date: "2024-05-10"
 excerpt: "最近有接入SpringAI的需求，但是SpringAI要求JDK17+Springboot3，那我用的依赖版本都是从网上项目copy的，万年不变的java8，权衡一下利弊，还是升级一下吧，毕竟spring都放弃java8了，这个文章记录一下升级日志。 前置版本 Java： jdk8 maven3.8"
-category: ""
+category: "后端"
 tags: ["Spring cloud","springboot3","微服务"]
 wordCount: 952
 headings: [{"level":2,"id":"heading-1","text":"前置版本"},{"level":2,"id":"heading-2","text":"升级过程"},{"level":2,"id":"heading-3","text":"配置问题"},{"level":2,"id":"heading-4","text":"升级后的版本"}]

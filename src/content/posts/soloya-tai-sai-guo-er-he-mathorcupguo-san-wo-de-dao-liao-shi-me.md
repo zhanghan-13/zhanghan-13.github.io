@@ -3,7 +3,7 @@ id: "soloya-tai-sai-guo-er-he-mathorcupguo-san-wo-de-dao-liao-shi-me"
 title: "Solo亚太赛国二和MathorCup国三 我得到了什么"
 date: "2024-01-10"
 excerpt: "Solo亚太赛国二和Mathor Cup国三 我得到了什么 前言 我相信点进这个博客的同学都对数学建模有一定的了解，但是这里还是简单介绍一些数学建模。数模比赛是在一定的时间（一般是3-4天，也有一周及以上的），由三位同学一同协作完成一个题目，并提交论文和相关佐证材料的比赛。 为什么建议打数模 数模比"
-category: ""
+category: "随笔"
 tags: ["mathorcup","亚太赛","数学建模"]
 wordCount: 2725
 headings: [{"level":2,"id":"heading-1","text":"Solo亚太赛国二和Mathor Cup国三 我得到了什么"},{"level":2,"id":"heading-2","text":"前言"},{"level":2,"id":"heading-3","text":"为什么建议打数模"},{"level":2,"id":"heading-4","text":"数模题目的具体提升"},{"level":2,"id":"heading-5","text":"亚太赛和妈妈杯"},{"level":3,"id":"heading-6","text":"mathor cup"},{"level":3,"id":"heading-7","text":"亚太赛"},{"level":2,"id":"heading-8","text":"总结"}]

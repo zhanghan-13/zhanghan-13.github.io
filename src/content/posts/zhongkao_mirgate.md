@@ -3,7 +3,7 @@ id: "zhongkao_mirgate"
 title: "河南考生中考移民大庆大家究竟在吵什么？我爬取了两万五千条抖音评论和近6年分数线并进行了数据分析"
 date: "2024-01-16"
 excerpt: "所涉及到的知识点 爬虫 爬虫基础 requests库的基本使用 pyquery库的基本使用 js逆向 js补环境(VMP还原) execjs的使用 数据分析 pandas的使用 numpy的使用 matplotlib的使用 绘制组合条形图 绘制词云图 绘制折线图 绘制柱状图 存储数据 pymysql"
-category: ""
+category: "爬虫"
 tags: ["中考移民","抖音逆向","河南高考"]
 wordCount: 4466
 headings: [{"level":2,"id":"heading-1","text":"所涉及到的知识点"},{"level":2,"id":"heading-2","text":"数据爬取"},{"level":3,"id":"heading-3","text":"爬取分数线相关数据"},{"level":3,"id":"heading-4","text":"爬取评论数据"},{"level":2,"id":"heading-5","text":"数据分析结果"},{"level":3,"id":"heading-6","text":"如何进行数据分析"},{"level":3,"id":"heading-7","text":"分数线分析"},{"level":4,"id":"heading-8","text":"分数线排名"},{"level":4,"id":"heading-9","text":"两省对比"},{"level":3,"id":"heading-10","text":"抖音评论分析"},{"level":4,"id":"heading-11","text":"地域分析"},{"level":4,"id":"heading-12","text":"评论时间分析"},{"level":4,"id":"heading-13","text":"词云图分析"},{"level":4,"id":"heading-14","text":"归类分析"},{"level":3,"id":"heading-15","text":"写在后面"}]

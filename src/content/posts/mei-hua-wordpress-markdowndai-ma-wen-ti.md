@@ -3,7 +3,7 @@ id: "mei-hua-wordpress-markdowndai-ma-wen-ti"
 title: "美化WordPress markdown代码问题"
 date: "2024-05-11"
 excerpt: "wp这个我个人觉得是不太符合我的审美，下次等我的服务器到期了准备迁移到国内的一些博客框架。这个markdown的东西就解决一下吧，wp不是一个专门写博客的框架，原生对md支持的是真的不好，想实现一些基本功能得安一堆插件。结果最近发现一个特别好用的md插件：WP Githuber MD，woc，一个插"
-category: ""
+category: "网站搭建"
 tags: ["md插件","wordpress代码美化"]
 wordCount: 346
 headings: []

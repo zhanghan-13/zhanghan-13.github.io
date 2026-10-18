@@ -3,7 +3,7 @@ id: "scrapy-redisfen-bu-shi-pa-qu-shu-ju"
 title: "Scrapy-redis分布式爬取数据"
 date: "2023-10-30"
 excerpt: "本文共1257个字 导包 scrapy是使用redis这个数据库实现分布式的，因此我们刚开始要安装这个scrapy-redis包。pip install scrapy-redis。 创建项目"
-category: ""
+category: "爬虫"
 tags: ["scrapy","爬虫"]
 wordCount: 577
 headings: [{"level":2,"id":"heading-1","text":"导包"},{"level":2,"id":"heading-2","text":"创建项目"},{"level":2,"id":"heading-3","text":"配置settings文件"},{"level":2,"id":"heading-4","text":"spider配置"},{"level":2,"id":"heading-5","text":"可能存在的问题"}]

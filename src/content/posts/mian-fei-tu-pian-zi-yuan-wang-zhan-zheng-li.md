@@ -3,7 +3,7 @@ id: "mian-fei-tu-pian-zi-yuan-wang-zhan-zheng-li"
 title: "免费图片资源网站整理"
 date: "2023-09-26"
 excerpt: "本文共1048个字 前言 最近突发奇想想要收集一些漂亮的动漫小姐姐图片，当去B站，CSDN，博客园找了好多资源以后发现汇总一下比较好，方便以后查阅也方便大家查阅。 下述所有网站都是可以下载的，有的网站有轻微广告或需要付费下载，都会标明 国外网站 wallpaperscraft https://wal"
-category: ""
+category: "教程"
 tags: ["免费壁纸网站","图片资源"]
 wordCount: 624
 headings: [{"level":2,"id":"heading-1","text":"前言"},{"level":2,"id":"heading-2","text":"国外网站"},{"level":3,"id":"heading-3","text":"wallpaperscraft"},{"level":3,"id":"heading-4","text":"P站"},{"level":3,"id":"heading-5","text":"pexels"},{"level":3,"id":"heading-6","text":"Unsplash"},{"level":3,"id":"heading-7","text":"wallhaven"},{"level":3,"id":"heading-8","text":"wallroom"},{"level":3,"id":"heading-9","text":"wallpaperaccess"},{"level":3,"id":"heading-10","text":"anime-pictures"},{"level":3,"id":"heading-11","text":"alphacoders"},{"level":2,"id":"heading-12","text":"国内网站"},{"level":3,"id":"heading-13","text":"极简壁纸"},{"level":3,"id":"heading-14","text":"3G壁纸"}]

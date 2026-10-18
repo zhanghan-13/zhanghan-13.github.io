@@ -3,7 +3,7 @@ id: "wakatimeru-he-geng-xin-zi-ji-de-api-key"
 title: "WakaTime如何更新自己的API key"
 date: "2024-03-12"
 excerpt: "wakatime是一个流行的跟踪自己编码时间、文件、语言等的工具。如何配置跟踪是简单的，网上教程说的很明白，也基本是傻瓜式操作。 注册账号 获取API key 安装插件 输入API Key"
-category: ""
+category: "教程"
 tags: []
 wordCount: 212
 headings: []

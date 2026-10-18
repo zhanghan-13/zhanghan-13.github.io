@@ -3,7 +3,7 @@ id: "jie-jue-python-loggingmo-kuai-xie-ru-ri-zhi-wen-jian-hou-luan-ma-he-cun-zai
 title: "解决python logging模块写入日志文件后乱码和存在esc问题"
 date: "2024-05-17"
 excerpt: "乱码是因为没有设置文件格式，存在esc是因为颜色问题，阅读器无法渲染。解决配置如下 import re\n\n# 自定义formatter，匹配常见的ANSI转义序列，处理日志中的esc字符\nclass NoColorFormatter(logging.Formatter):\n    def forma"
-category: ""
+category: "爬虫"
 tags: []
 wordCount: 171
 headings: []

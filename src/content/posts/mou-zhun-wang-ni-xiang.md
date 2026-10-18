@@ -3,7 +3,7 @@ id: "mou-zhun-wang-ni-xiang"
 title: "某准网逆向"
 date: "2023-11-18"
 excerpt: "初步逆向思路 首先进入页面，这里我们爬取软件开发工程师的薪资。找到网络，发送页面数据那个请求，可以看到，请求数据有两个加密的，这个是get请求，请求url是https://www.kanzhun.com/search?cityCode=31&industryCodes=&pageNum=1&quer"
-category: ""
+category: "爬虫"
 tags: ["看准网，js逆向"]
 wordCount: 1835
 headings: [{"level":2,"id":"heading-1","text":"初步逆向思路"},{"level":2,"id":"heading-2","text":"找加密入口"},{"level":3,"id":"heading-3","text":"搜索interceptors"},{"level":3,"id":"heading-4","text":"搜索URL"},{"level":2,"id":"heading-5","text":"JS代码逻辑跟踪"},{"level":3,"id":"heading-6","text":"加密参数的获取"},{"level":3,"id":"heading-7","text":"解密的逻辑"},{"level":2,"id":"heading-8","text":"python代码复现"},{"level":2,"id":"heading-9","text":"总结"}]

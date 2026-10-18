@@ -3,7 +3,7 @@ id: "knife4jwang-guan-ju-he-wen-dang-wen-ti"
 title: "Knife4j网关聚合文档问题"
 date: "2024-05-22"
 excerpt: "Knife4j使用的三个问题，全是版本问题，聚合博客： Knife4j请求文档异常 - bugDesigner的博客 springboot版本问题 解决SpringCloudGateway集成knife4j文档 - bugDesigner的博客 springcloud技术栈版本问题 版本 <!--"
-category: ""
+category: "后端"
 tags: ["/v3/api-docs/swagger-config","接口文档","网关聚合"]
 wordCount: 363
 headings: [{"level":2,"id":"heading-1","text":"版本"},{"level":2,"id":"heading-2","text":"问题描述"},{"level":2,"id":"heading-3","text":"解决方法"}]

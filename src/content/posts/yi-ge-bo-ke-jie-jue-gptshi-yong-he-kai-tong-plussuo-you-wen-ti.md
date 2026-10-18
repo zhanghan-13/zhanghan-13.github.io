@@ -3,7 +3,7 @@ id: "yi-ge-bo-ke-jie-jue-gptshi-yong-he-kai-tong-plussuo-you-wen-ti"
 title: "一个博客解决GPT使用和开通plus所有问题"
 date: "2024-05-19"
 excerpt: "最近GPT4o一出，估计openai又更新了一下ip库，现在更严格了。昨天倒腾了两小时才把两天前忘记续费的plus给续费上，一直提醒您的卡已被拒绝或尝试用借记卡支付，也去油管谷歌看了不少教程，大概知道应该是ip不够干净的问题，但是找不到合适的机场，下面分享一下网上资源很少的经验。 这个博客关于GPT"
-category: ""
+category: "教程"
 tags: ["gpt4","gpt4o","openapi","plus续费"]
 wordCount: 1019
 headings: [{"level":2,"id":"%E5%85%B3%E4%BA%8Egpt-plus%E7%BB%AD%E8%B4%B9%E9%97%AE%E9%A2%98","text":"关于GPT Plus续费问题"},{"level":2,"id":"%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E9%81%BF%E5%85%8D%E5%B0%81%E5%8F%B7%E6%A6%82%E7%8E%87","text":"关于如何使用避免封号概率"}]

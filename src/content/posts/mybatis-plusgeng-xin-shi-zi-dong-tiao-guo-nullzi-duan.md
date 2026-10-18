@@ -3,7 +3,7 @@ id: "mybatis-plusgeng-xin-shi-zi-dong-tiao-guo-nullzi-duan"
 title: "Mybatis-plus更新时自动跳过null字段"
 date: "2024-04-28"
 excerpt: "在insert和update的时候，mp都是默认会把null字段不更新到数据库中，如果想要改变这个情况。 自己构造wrapper或实体类 在需要更新为null的字段上加@TableField(updateStrategy = FieldStrategy.IGNORED) yml配置update-st"
-category: ""
+category: "后端"
 tags: ["mybatis-plus"]
 wordCount: 272
 headings: []

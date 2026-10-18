@@ -3,7 +3,7 @@ id: "win10you-jian-da-kai-wen-jian-jia-kuai-jie-fang-shi-de-she-zhi"
 title: "win10右键打开文件[夹]快捷方式的设置"
 date: "2023-09-25"
 excerpt: "本文共1887个字 前言 之前学习C++的时候安装了QtCreator，后来因为不太好用转投Jetbrains全家桶门下，但是删除以后偶尔发现右键打开文件->更多方式时发现老是出现已经删除的Qt打开方式来捣乱，今天有时间就解决一下这个问题，顺便把我的Sublime Text添加到文件/文件夹的快捷方"
-category: ""
+category: "教程"
 tags: []
 wordCount: 1309
 headings: [{"level":2,"id":"heading-1","text":"前言"},{"level":2,"id":"heading-2","text":"解决方式"},{"level":3,"id":"heading-3","text":"修改更多打开方式的菜单"},{"level":3,"id":"heading-4","text":"修改文件/文件夹的右键菜单。"},{"level":2,"id":"heading-5","text":"后言"}]

@@ -3,7 +3,7 @@ id: "jie-jue-rabbitmqde-chuang-jian-dui-lie-shi-bai-wen-ti"
 title: "解决RabbitMQ的创建队列失败问题"
 date: "2024-05-12"
 excerpt: "报错信息如下 [ischool-search] [Container#0-1] o.s.a.r.listener.BlockingQueueConsumer : Failed to declare queue: ai_queue 2024-05-06T12:45:02.418+08:00 WARN"
-category: ""
+category: "后端"
 tags: ["rabbitmq","队列创建失败"]
 wordCount: 125
 headings: []

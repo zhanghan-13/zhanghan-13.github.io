@@ -13,6 +13,9 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const sourcePath = process.argv[2]
 if (!sourcePath) throw new Error('Usage: node scripts/migrate-content.mjs <content.json> [aliases.json]')
 const source = JSON.parse(readFileSync(sourcePath, 'utf8'))
+// Original article pages omit categories; later archived category listings
+// provide verified memberships that must survive a repeated migration.
+const recoveredCategories = JSON.parse(readFileSync(resolve(root, 'scripts/recovered-categories.json'), 'utf8')).articles
 const aliasesPath = process.argv[3] || resolve(dirname(sourcePath), 'aliases.json')
 const aliases = existsSync(aliasesPath) ? JSON.parse(readFileSync(aliasesPath, 'utf8')) : {}
 const postsDir = resolve(root, 'src/content/posts')
@@ -180,7 +183,7 @@ for (const article of [...source.articles].sort((a, b) => b.date.localeCompare(a
     title: article.title,
     date: article.date,
     excerpt: article.excerpt || article.bodyText?.slice(0, 130) || '',
-    category: article.categories?.[0]?.name || '',
+    category: article.categories?.[0]?.name || recoveredCategories[article.slug]?.category || '',
     tags: (article.tags || []).map(tag => tag.name),
     wordCount: countWords(body),
     headings,

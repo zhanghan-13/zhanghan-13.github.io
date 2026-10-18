@@ -49,6 +49,8 @@ draft: false
 
 初始迁入 50 篇旧博客文章（2023-09-25 至 2025-02-14）、157 张正文图片、153 个代码块，历史 taxonomy 为 7 分类与 91 标签。历史正文保留清洗后的 HTML，放在 Markdown 文件中，`legacySlug` 标识原文迁移；不要给新 Markdown 文章添加该字段。
 
+2026-10-18 从 8 张 Halo 分类页历史快照补回了 40 篇文章的分类，50 篇现已全部归类。按原文 `/archives/<id>` 精确匹配，并与 WordPress 原文面包屑分类交叉核对；没有根据标题推断分类。`scripts/recovered-categories.json` 保存逐篇归属、快照链接与文件哈希，迁移脚本会用它补齐旧导出中缺失的分类。
+
 - `src/layouts/SiteLayout.astro`：网站框架、SEO 与导航。
 - `src/components/ProfileIntro.tsx`：个人介绍、头像和社交链接。
 - `src/index.css`：已确认设计样式与主题。

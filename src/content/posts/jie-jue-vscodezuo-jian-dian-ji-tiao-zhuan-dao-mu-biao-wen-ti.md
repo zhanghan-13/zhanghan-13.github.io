@@ -3,7 +3,7 @@ id: "jie-jue-vscodezuo-jian-dian-ji-tiao-zhuan-dao-mu-biao-wen-ti"
 title: "解决VSCode左键点击跳转到目标问题"
 date: "2024-05-10"
 excerpt: "vscode跟jetbrains家的产品默认快捷键有很大差别，如果是全栈，还是很推荐webstorm（但是我前端一直用的vs也懒得换），动不动改快捷键很痛苦，这次来解决ctrl+左键跳转到定义的问题（仅仅测试过js）。 我的现在是ctrl+左边会打开一个小窗口(vscode管它叫速览视图) 解决方式"
-category: ""
+category: "前端"
 tags: []
 wordCount: 191
 headings: []

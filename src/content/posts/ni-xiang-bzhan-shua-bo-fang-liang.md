@@ -3,7 +3,7 @@ id: "ni-xiang-bzhan-shua-bo-fang-liang"
 title: "逆向B站刷播放量"
 date: "2024-01-16"
 excerpt: "逆向B站刷播放量 找到刷播放量的请求URL -.js -.css -.png -.svg -.html -data -Ha 首先在过滤器里面把静态资源相关的先过滤了 找到请求URL为：https://api.bilibili.com/x/click-interface/click/now。但是这个是"
-category: ""
+category: "爬虫"
 tags: ["B站逆向","python爬虫","刷播放量"]
 wordCount: 3038
 headings: [{"level":1,"id":"heading-1","text":"逆向B站刷播放量"},{"level":2,"id":"heading-2","text":"找到刷播放量的请求URL"},{"level":2,"id":"heading-3","text":"明确需要逆向的参数"},{"level":3,"id":"heading-4","text":"查询字符串参数："},{"level":3,"id":"heading-5","text":"请求体："},{"level":3,"id":"heading-6","text":"Cookie:"},{"level":2,"id":"heading-7","text":"逆向过程"},{"level":3,"id":"heading-8","text":"查询字符串参数"},{"level":3,"id":"heading-9","text":"请求体"},{"level":3,"id":"heading-10","text":"Cookie"},{"level":2,"id":"heading-11","text":"Python复现"}]
