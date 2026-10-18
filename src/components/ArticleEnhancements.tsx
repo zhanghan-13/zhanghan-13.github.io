@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArticleImagePreview } from './article-image-preview'
 import { ArticleCodeCopy } from './article-code-copy'
+import { ArticleHeadingLinks } from './article-heading-links'
 import { highlightArticleCode } from '@/lib/article-highlight'
 import '@/code-highlight.css'
 
@@ -20,6 +21,7 @@ export default function ArticleEnhancements({ postId }: { postId: string }) {
   }, [postId])
 
   return ready ? <>
+    <ArticleHeadingLinks rootRef={rootRef} articleId={postId} />
     <ArticleCodeCopy rootRef={rootRef} articleId={postId} />
     <ArticleImagePreview rootRef={rootRef} articleId={postId} />
   </> : null
